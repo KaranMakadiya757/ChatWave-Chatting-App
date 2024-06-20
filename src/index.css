@@ -1,0 +1,29 @@
+* {
+  font-family: 'Allen-Regular';
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  FONTS  */
+
+
+@font-face {
+  font-family: 'Allen-Regular';
+  src: url('./assets/Fonts/AllenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Allen-Bold';
+  src: url('./assets/Fonts/AllenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Allen-Light';
+  src: url('./assets/Fonts/AllenSans-Light.ttf') format('truetype');
+}

@@ -1,0 +1,89 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    width: 18%;
+    height: fit-content;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 60px;
+    border-radius: 10px;
+}
+
+.wrapper span {
+    color: rgb(29, 112, 29);
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wrapper div {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.wrapper form div input {
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px 35px 10px 35px;
+    width: 100%;
+    height: 25px;
+    background: transparent;
+    outline: none;
+    margin: 10px 0;
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+        font-size: small;
+    }
+
+    &:focus {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.697);
+    }
+}
+
+.wrapper form div .icon {
+    position: absolute;
+    left: 10px;
+}
+
+.wrapper form .button {
+    background-color: rgb(29, 112, 29);
+    color: antiquewhite;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: large;
+    margin: 10px 0;
+}
+
+
+.msg {
+    font-size: small;
+}
+
+.msg .link {
+    text-decoration: none;
+    font-weight: bolder;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
