@@ -1,89 +1,124 @@
-.container {
+.login_container {
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    display: grid;
+    background-color: var(--soft);
 
-.wrapper {
-    width: 18%;
-    height: fit-content;
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 60px;
-    border-radius: 10px;
-}
+    .login_wrapper {
+        width: 50%;
+        gap: 20px;
+        place-self: center;
+        display: flex;
+        padding: 20px 60px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+    }
 
-.wrapper span {
-    color: rgb(29, 112, 29);
-    font-weight: bold;
-    font-size: 30px;
-}
+    .login_wrapper .left {
+        flex: 1;
+    }
+
+    .left img {
+        width: 100%;
+    }
+
+    .login_wrapper .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .right h1 {
+        font-family: 'ExtraBold';
+        font-size: 28px;
+        text-align: center;
+        letter-spacing: 0.05em;
+        color: var(--dark);
+        margin: 0;
+    }
 
 
-.wrapper form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+    .right form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.wrapper div {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
+    .right div {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
 
-.wrapper form div input {
-    border: none;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 10px 35px 10px 35px;
-    width: 100%;
-    height: 25px;
-    background: transparent;
-    outline: none;
-    margin: 10px 0;
+    .right form div input {
+        border: none;
+        border-radius: 5px;
+        padding: 20px 50px;
+        width: 100%;
+        margin-bottom: 10px;
+        background: transparent;
+        outline: none;
+        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+        transition: box-shadow 0.3s ease;
+        font-family: 'SemiBold';
+        font-size: 18px;
+        color: var(--gray);
+        letter-spacing: 0.05em;
 
-    &::placeholder {
-        color: rgba(0, 0, 0, 0.4);
+        &:focus {
+            outline: none !important;
+            box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+        }
+
+        &::placeholder {
+            font-family: 'Regular';
+            font-size: 18px;
+            opacity: 70%;
+            color: var(--gray);
+            letter-spacing: 0.05em;
+        }
+    }
+
+    .right form div .icon {
+        position: absolute;
+        left: 18px;
+        font-size: 18px;
+        color: var(--gray);
+    }
+
+    .login_wrapper form .button {
+        background: transparent;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+        font-family: 'SemiBold';
+        font-size: 20px;
+        letter-spacing: 0.08em;
+
+        &:hover {
+            box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
+
+        }
+    }
+
+
+    .msg {
         font-size: small;
     }
 
-    &:focus {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.697);
+    .msg .link {
+        text-decoration: none;
+        font-weight: bolder;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
-}
 
-.wrapper form div .icon {
-    position: absolute;
-    left: 10px;
-}
-
-.wrapper form .button {
-    background-color: rgb(29, 112, 29);
-    color: antiquewhite;
-    font-weight: bold;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;
-    cursor: pointer;
-    font-size: large;
-    margin: 10px 0;
-}
-
-
-.msg {
-    font-size: small;
-}
-
-.msg .link {
-    text-decoration: none;
-    font-weight: bolder;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }

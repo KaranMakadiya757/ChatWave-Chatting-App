@@ -1,5 +1,45 @@
 * {
-  font-family: 'Allen-Regular';
+  font-family: 'Regular';
+  color: var(--default);
+}
+
+:root {
+  --blue: #0056B3;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #A91E2C;
+  --orange: #fd7e14;
+  --yellow: #F0B400;
+  --green: #18634B;
+  --teal: #0056B3;
+  --cyan: #17a2b8;
+  --white: #ECF0F3;
+  --gray: #93a5be;
+  --gray-dark: #525480;
+  --primary: #e6e7ee;
+  --secondary: #2D4CC8;
+  --success: #18634B;
+  --info: #0056B3;
+  --warning: #F0B400;
+  --danger: #A91E2C;
+  --light: #D1D9E6;
+  --dark: #31344b;
+  --default: #262833;
+  --white: #ECF0F3;
+  --gray: #44476A;
+  --neutral: #ECF0F3;
+  --soft: #e6e7ee;
+  --black: #262833;
+  --purple: #6f42c1;
+  --gray-100: #f3f7fa;
+  --gray-200: #fafbfe;
+  --gray-300: #e6e7ee;
+  --gray-400: #D1D9E6;
+  --gray-500: #b1bcce;
+  --gray-600: #93a5be;
+  --gray-700: #66799e;
+  --gray-800: #525480;
 }
 
 body {
@@ -26,4 +66,39 @@ body {
 @font-face {
   font-family: 'Allen-Light';
   src: url('./assets/Fonts/AllenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Regular';
+  src: url('./assets/Fonts/NunitoSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ExtraLight';
+  src: url('./assets/Fonts/NunitoSans-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Light';
+  src: url('./assets/Fonts/NunitoSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SemiBold';
+  src: url('./assets/Fonts/NunitoSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Black';
+  src: url('./assets/Fonts/NunitoSans-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bold';
+  src: url('./assets/Fonts/NunitoSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ExtraBold';
+  src: url('./assets/Fonts/NunitoSans-ExtraBold.ttf') format('truetype');
 }

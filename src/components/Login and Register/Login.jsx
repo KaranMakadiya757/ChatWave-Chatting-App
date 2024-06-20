@@ -4,6 +4,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import logo from '../../assets/Photos/logo.png'
 import './Login.css'
 
 const Login = () => {
@@ -106,40 +107,46 @@ const Login = () => {
 
 
     return (
-        <div className='container'>
-            <div className='wrapper'>
-                <span>LOGIN</span>
-                <form onSubmit={(e) => handlesubmit(e)}>
-                    <div>
-                        <input
-                            type="text"
-                            name="login"
-                            value={data.login}
-                            placeholder="Username"
-                            onChange={(e) => { handlechange(e); setemsg(true); }}
-                            required
-                        />
-                        <FaUser className='icon' />
-                    </div>
-                    {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {usererr} </span>}
+        <div className='login_container'>
+            <div className='login_wrapper'>
+                <div className="left">
+                    <img src={logo} alt="" />
+                </div>
+                <div className="right">
+                    {/* <h1>LOGIN</h1> */}
+                    <form onSubmit={(e) => handlesubmit(e)}>
+                        <div>
+                            <input
+                                type="text"
+                                name="login"
+                                value={data.login}
+                                placeholder="Username"
+                                onChange={(e) => { handlechange(e); setemsg(true); }}
+                                required
+                            />
+                            <FaUser className='icon' />
+                        </div>
+                        {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {usererr} </span>}
 
-                    <div>
-                        <input
-                            type='password'
-                            name="password"
-                            value={data.password}
-                            placeholder="password"
-                            onChange={(e) => { handlechange(e); setemsg(true); }}
-                            required
-                        />
-                        <FaLock className='icon' />
-                    </div>
-                    {apierr !== '' && <span style={{ color: "red", fontSize: 'X-small', fontWeight: "bold" }}> {apierr} </span>}
-                    {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {passworderr} </span>}
+                        <div>
+                            <input
+                                type='password'
+                                name="password"
+                                value={data.password}
+                                placeholder="password"
+                                onChange={(e) => { handlechange(e); setemsg(true); }}
+                                required
+                            />
+                            <FaLock className='icon' />
+                        </div>
+                        {apierr !== '' && <span style={{ color: "red", fontSize: 'X-small', fontWeight: "bold" }}> {apierr} </span>}
+                        {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {passworderr} </span>}
 
-                    <input className='button' type="submit" value="login" />
-                </form>
-                <div className='msg'>Don't Have a Account? No worries <Link className='link' to='/register'>SignUp</Link></div>
+                        <input className='button' type="submit" value="login" />
+                    </form>
+                    <div className='msg'>Don't Have a Account? No worries <Link className='link' to='/register'>SignUp</Link></div>
+                </div>
+
             </div>
         </div>
     );
