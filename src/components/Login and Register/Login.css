@@ -20,6 +20,7 @@
 
     .left img {
         width: 100%;
+        filter: drop-shadow(3px 3px 6px #b8b9be);
     }
 
     .login_wrapper .right {
@@ -54,6 +55,7 @@
     }
 
     .right form div input {
+        position: relative;
         border: none;
         border-radius: 5px;
         padding: 20px 50px;
@@ -70,7 +72,6 @@
 
         &:focus {
             outline: none !important;
-            box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
         }
 
         &::placeholder {
@@ -81,12 +82,22 @@
             letter-spacing: 0.05em;
         }
     }
+    .right form div input.error{
+        color: var(--danger);
+    }
 
-    .right form div .icon {
+    .right .icon {
         position: absolute;
-        left: 18px;
+        top: 45%;
+        left: 15px;
+        transform: translateY(-50%);
         font-size: 18px;
         color: var(--gray);
+        cursor: pointer;
+    }
+
+    .right .icon.iconerr{
+        color: var(--danger);
     }
 
     .login_wrapper form .button {
@@ -100,6 +111,7 @@
         font-family: 'SemiBold';
         font-size: 20px;
         letter-spacing: 0.08em;
+        color: var(--gray);
 
         &:hover {
             box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
@@ -109,12 +121,18 @@
 
 
     .msg {
-        font-size: small;
+        font-family: 'Regular';
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: var(--gray);
     }
 
     .msg .link {
         text-decoration: none;
-        font-weight: bolder;
+        font-family: 'Black';
+        font-size: 13px;
+        letter-spacing: 0.05em;
+        color: var(--gray);
 
         &:hover {
             text-decoration: underline;

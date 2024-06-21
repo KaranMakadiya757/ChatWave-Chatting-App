@@ -1,46 +1,17 @@
 import axios from "axios";
 import CryptoJS from 'crypto-js';
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaUnlock } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from '../../assets/Photos/logo.png'
 import './Login.css'
 
 const Login = () => {
+    const [showpass, setshowpass] = useState(false)
     const [data, setdata] = useState({ login: "", password: "" });
-    const [usererr, setusererr] = useState(" ");
-    const [passworderr, setpassworderr] = useState(" ");
-    const [emsg, setemsg] = useState(false);
-    const [apierr, setapierr] = useState("");
+    const [error, seterror] = useState({ login: false, password: false });
     const nev = useNavigate();
-
-
-    /* --------------------------- VALIDATE USER --------------------------- */
-
-
-    const validateuser = () => {
-        const regex = /^[a-zA-Z0-9_]{3,10}$/;
-
-        if (!regex.test(data.login)) {
-            setusererr("it should be in range of 3 to 10. only upper case, lower case, digits and _ is allowed");
-        }
-        else {
-            setusererr("");
-        }
-    };
-
-    const validatepassword = () => {
-        const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./]).{8,}$/;
-
-        if (!regex.test(data.password)) {
-            setpassworderr("Password should be minimum 8 character long and must contain atleast one Uppercase letter, one lower case letter and a special character");
-        }
-        else {
-            setpassworderr("");
-        }
-    };
-
 
     /* --------------------------- CREATE USER SESSION --------------------------- */
 
@@ -84,27 +55,24 @@ const Login = () => {
 
     /* --------------------------- HANDLE CHANGE --------------------------- */
 
-
-    const handlechange = (e) => {
-        setdata({ ...data, [e.target.name]: e.target.value });
-    };
-
     const handlesubmit = (e) => {
         e.preventDefault();
-        if (usererr === "" && passworderr === "") {
+
+        const userregex = /^[a-zA-Z0-9_]{3,10}$/;
+        const passwordregex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./]).{8,}$/;
+
+        if (data.login === '' || data.password === '' || !userregex.test(data.login) || !passwordregex.test(data.password)) {
+            seterror({
+                ...error,
+                login: (data.login === '' || !userregex.test(data.login)) && true,
+                password: (data.password === '' || !passwordregex.test(data.password)) && true
+            })
+        }
+        else {
             createsession();
-            setemsg(false);
-        } else {
-            setemsg(true);
+            seterror({ login: false, password: false })
         }
     };
-
-    useEffect(() => {
-        validateuser();
-        validatepassword();
-    }, [handlechange]);
-
-
 
     return (
         <div className='login_container'>
@@ -113,38 +81,41 @@ const Login = () => {
                     <img src={logo} alt="" />
                 </div>
                 <div className="right">
-                    {/* <h1>LOGIN</h1> */}
                     <form onSubmit={(e) => handlesubmit(e)}>
                         <div>
                             <input
                                 type="text"
                                 name="login"
+                                className={error.login ? 'error' : ''}
                                 value={data.login}
                                 placeholder="Username"
-                                onChange={(e) => { handlechange(e); setemsg(true); }}
+                                onChange={(e) => setdata({ ...data, [e.target.name]: e.target.value })}
                                 required
                             />
-                            <FaUser className='icon' />
+                            <FaUser className={`icon ${error.login && 'iconerr'}`} />
                         </div>
-                        {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {usererr} </span>}
 
                         <div>
                             <input
-                                type='password'
+                                type={showpass ? 'text' : 'password'}
                                 name="password"
+                                className={error.password ? 'error' : ''}
                                 value={data.password}
                                 placeholder="password"
-                                onChange={(e) => { handlechange(e); setemsg(true); }}
+                                onChange={(e) => setdata({ ...data, [e.target.name]: e.target.value })}
                                 required
                             />
-                            <FaLock className='icon' />
-                        </div>
-                        {apierr !== '' && <span style={{ color: "red", fontSize: 'X-small', fontWeight: "bold" }}> {apierr} </span>}
-                        {emsg && <span style={{ color: "red", fontSize: "10px", fontWeight: "bold" }}> {passworderr} </span>}
+                            {showpass ?
+                                <FaUnlock className={`icon ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
+                                :
+                                <FaLock className={`icon ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
+                            }
 
-                        <input className='button' type="submit" value="login" />
+                        </div>
+
+                        <input className='button' type="submit" value="LOGIN" />
                     </form>
-                    <div className='msg'>Don't Have a Account? No worries <Link className='link' to='/register'>SignUp</Link></div>
+                    <div className='msg'>Don't Have a Account? No worries <NavLink className='link' to='/register'>SignUp</NavLink></div>
                 </div>
 
             </div>
