@@ -17,10 +17,12 @@
 
     .register_wrapper .left {
         flex: 1;
+        display: grid;
     }
 
     .left img {
         width: 100%;
+        place-self: center;
         filter: drop-shadow(3px 3px 6px #b8b9be);
     }
 
@@ -31,12 +33,6 @@
         align-items: center;
         justify-content: center;
         gap: 20px;
-    }
-
-    .right span {
-        color: rgb(29, 112, 29);
-        font-weight: bold;
-        font-size: 30px;
     }
 
     .right form {
@@ -63,7 +59,7 @@
         box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
         transition: box-shadow 0.3s ease;
         font-family: 'SemiBold';
-        font-size: 18px;
+        font-size: 4rem;
         color: var(--gray);
         letter-spacing: 0.05em;
 
@@ -73,13 +69,14 @@
 
         &::placeholder {
             font-family: 'Regular';
-            font-size: 18px;
+            font-size: 4rem;
             opacity: 70%;
             color: var(--gray);
             letter-spacing: 0.05em;
         }
     }
-    .right form div input.error{
+
+    .right form div input.error {
         color: var(--danger);
     }
 
@@ -88,11 +85,12 @@
         top: 45%;
         left: 15px;
         transform: translateY(-50%);
-        font-size: 18px;
+        font-size: 4rem;
         color: var(--gray);
         cursor: pointer;
     }
-    .right .icon.iconerr{
+
+    .right .icon.iconerr {
         color: var(--danger);
     }
 
@@ -105,7 +103,7 @@
         cursor: pointer;
         box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
         font-family: 'SemiBold';
-        font-size: 20px;
+        font-size: 5rem;
         letter-spacing: 0.08em;
         color: var(--gray);
         margin: 0;
@@ -114,12 +112,28 @@
             box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
 
         }
+
+        &:disabled {
+            cursor: not-allowed;
+            box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
+        }
+    }
+
+
+    .right .loading {
+        display: inline-block;
+        width: 5rem;
+        height: 5rem;
+        border: 3px solid var(--gray);
+        border-top: 3px solid var(--white);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
     }
 
 
     .right .msg {
         font-family: 'Regular';
-        font-size: 12px;
+        font-size: 3rem;
         letter-spacing: 0.05em;
         color: var(--gray);
     }
@@ -127,7 +141,7 @@
     .msg .link {
         text-decoration: none;
         font-family: 'Black';
-        font-size: 13px;
+        font-size: 3rem;
         letter-spacing: 0.05em;
         color: var(--gray);
 
@@ -136,4 +150,14 @@
         }
     }
 
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

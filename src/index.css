@@ -39,6 +39,8 @@
   --gray-600: #93a5be;
   --gray-700: #66799e;
   --gray-800: #525480;
+
+  font-size: 4px;
 }
 
 body {
@@ -47,6 +49,16 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 4rem;
+}
+
+.Toastify__toast {
+  background: transparent;
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  font-family: 'Regular';
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  color: var(--gray);
 }
 
 /*  FONTS  */

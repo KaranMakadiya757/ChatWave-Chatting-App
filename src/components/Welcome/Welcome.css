@@ -14,10 +14,14 @@
 
 .wrapper h1 {
     font-family: 'Black';
-    font-size: 38px;
+    font-size: 10rem;
+    text-transform: uppercase;
     text-align: center;
     letter-spacing: 0.05em;
-    color: var(--dark);
+    /* color: var(--dark); */
+    color: transparent;
+    background: linear-gradient(to right, var(--cyan), var(--gray-dark), var(--orange), var(--indigo), var(--gray));
+    background-clip: text;
 }
 
 .btncontain {
@@ -29,19 +33,19 @@
 
 .btncontain button {
     background: transparent;
-        padding: 20px 50px;
-        border: none;
-        border-radius: 8px;
-        width: 100%;
-        cursor: pointer;
-        box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
-        font-family: 'Bold';
-        font-size: 20px;
-        letter-spacing: 0.08em;
-        color: var(--gray);
+    padding: 20px 50px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+    font-family: 'Bold';
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--gray);
 
-        &:hover {
-            box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
+    &:hover {
+        box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
 
-        }
+    }
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import logo from '../../assets/Photos/logo.png'
+import React, { useState } from "react";
+import { useMutation } from "react-query";
+import { useNavigate, NavLink } from "react-router-dom";
 import { FaUser, FaLock, FaUnlock } from "react-icons/fa";
+import { Create_User } from "../API/APICalls";
+import { toast } from 'react-toastify';
+import logo from '../../assets/Photos/logo.png'
 import './Register.css'
 
 const Register = () => {
@@ -13,8 +13,6 @@ const Register = () => {
     const [showpass, setshowpass] = useState(false)
 
     const nev = useNavigate();
-
-    /* --------------------------- HANDLE CHANGE --------------------------- */
 
     const handlesubmit = (e) => {
         e.preventDefault();
@@ -30,38 +28,24 @@ const Register = () => {
             })
         }
         else {
-            createuser();
+            register.mutate(data)
             seterror({ login: false, password: false })
         }
     };
 
-
-    /* --------------------------- CREATE USER --------------------------- */
-
-    const createuser = async () => {
-        try {
-            const res = await axios.post("https://api.quickblox.com/users.json",
-                { user: data },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "ApiKey HnJNFUUkVXV_jEdPsqcrAWxBzAF-srn_QMu2EXkm81Y",
-                    }
-                }
-            );
-            if (res) {
-                console.log(res)
-
-                setdata({ login: "", password: "" });
-                setapierr('');
-                nev('/login');
-            }
-        } catch (error) {
-            if (error.response.data.errors.login[0] === 'has already been taken') {
-                setapierr('Username Has already Been Taken by someone')
+    const register = useMutation('Create_User', Create_User,
+        {
+            onError: (error) => {
+                console.log(error)
+                toast.error(`Oops! 😐 ${error.response.data.errors.login.map(i => i)}`, {
+                    position: "top-center",
+                    autoClose: false,
+                    hideProgressBar: true
+                })
             }
         }
-    };
+    )
+
 
     return (
         <div className='register_container'>
@@ -79,9 +63,8 @@ const Register = () => {
                                 className={error.login ? 'error' : ''}
                                 placeholder="Username"
                                 onChange={(e) => setdata({ ...data, [e.target.name]: e.target.value })}
-                                required
                             />
-                            <FaUser className='icon' />
+                            <FaUser className={`icon ${error.login && 'iconerr'}`} />
                         </div>
 
                         <div className='inputbox'>
@@ -92,7 +75,6 @@ const Register = () => {
                                 className={error.password ? 'error' : ''}
                                 placeholder="password"
                                 onChange={(e) => setdata({ ...data, [e.target.name]: e.target.value })}
-                                required
                             />
                             {showpass ?
                                 <FaUnlock className={`icon ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
@@ -101,7 +83,8 @@ const Register = () => {
                             }
                         </div>
 
-                        <input className='button' type="submit" value="SIGNUP" />
+                        <button className='button' disabled={register.isLoading}>{register.isLoading ? <span className="loading"></span> : 'SIGNUP'}</button>
+
                     </form>
                     <span className='msg'>Created one? Now go and <NavLink className='link' to='/login'>Login</NavLink></span>
                 </div>
@@ -111,3 +94,29 @@ const Register = () => {
 };
 
 export default Register;
+
+
+// const createuser = async () => {
+//     try {
+//         const res = await axios.post("https://api.quickblox.com/users.json",
+//             { user: data },
+//             {
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     Authorization: "ApiKey HnJNFUUkVXV_jEdPsqcrAWxBzAF-srn_QMu2EXkm81Y",
+//                 }
+//             }
+//         );
+//         if (res) {
+//             console.log(res)
+
+//             setdata({ login: "", password: "" });
+//             setapierr('');
+//             nev('/login');
+//         }
+//     } catch (error) {
+//         if (error.response.data.errors.login[0] === 'has already been taken') {
+//             setapierr('Username Has already Been Taken by someone')
+//         }
+//     }
+// };
