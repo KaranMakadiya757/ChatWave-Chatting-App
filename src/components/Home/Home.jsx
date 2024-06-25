@@ -1,5 +1,5 @@
 import Sidebar from '../Side Panel/Sidebar'
-import Chats from "../Chats/Chats";
+// import Chats from "../Chats/Chats";
 import { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchdialoglist, fetchmsglist } from "../App/APISlice";
@@ -24,7 +24,7 @@ const Home = () => {
         <div className='container'>
             <div className='wrapper'>
                 <Sidebar />
-                <Chats />
+                {/* <Chats /> */}
             </div>
         </div>
     );

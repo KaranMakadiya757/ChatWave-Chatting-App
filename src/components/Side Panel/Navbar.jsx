@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
 import { MdLogout, MdGroups, MdAddCircleOutline } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
-import style from './Navbar.module.css';
+import { useQuery } from 'react-query';
+import { fetchuser, fetchuserlist } from '../API/APICalls';
+import './Sidebar.css'
 // import { fetchuserlist, fetchuser, createchat, creategrpchat } from '../App/APISlice';
 
 
@@ -14,47 +16,53 @@ const Navbar = () => {
     const [gname, setgname] = useState('');
     const [menu, setmenu] = useState(false);
     const [selectedUsers, setSelectedUsers] = useState([]);
-    const user = useSelector(state => state.API.userinfo);
-    const userlist = useSelector(state => state.API.userlist)
+    // const user = useSelector(state => state.API.userinfo);
+    // const userlist = useSelector(state => state.API.userlist)
     const nev = useNavigate();
     const addRef = useRef(null);
 
-    // const handlelogout = () => {
-    //     sessionStorage.removeItem('userid');
-    //     sessionStorage.removeItem('QBtoken');
-    //     nev('/login');
-    // }
-    // const handleadd = (user) => {
-    //     console.log(user.user.id)
-    //     dispatch(createchat(user.user.id))
-    //     setadd(false)
-    //     setmenu(false)
-    // }
-    // const handlegrp = (userId) => {
-    //     // console.log(userId)
-    //     if (selectedUsers.includes(userId)) {
-    //         setSelectedUsers(selectedUsers.filter(id => id !== userId));
-    //     } else {
-    //         setSelectedUsers([...selectedUsers, userId]);
-    //     }
-    // };
-    // const handlecreategrp = (e) => {
-    //     e.preventDefault()
-    //     if (selectedUsers.length < 2) {
-    //         alert('Please Select atleast 3 users to create a group')
-    //     }
-    //     else {
-    //         dispatch(creategrpchat(gname, selectedUsers))
-    //         setgrpchat(false)
-    //         setmenu(false)
-    //         setSelectedUsers([])
-    //         setgname('')
-    //     }
-    // };
+    const handlelogout = () => {
+        // sessionStorage.removeItem('userid');
+        // sessionStorage.removeItem('QBtoken');
+        // nev('/login');
+    }
+    const handleadd = (user) => {
+        // console.log(user.user.id)
+        // dispatch(createchat(user.user.id))
+        // setadd(false)
+        // setmenu(false)
+    }
+    const handlegrp = (userId) => {
+        // console.log(userId)
+        // if (selectedUsers.includes(userId)) {
+        //     setSelectedUsers(selectedUsers.filter(id => id !== userId));
+        // } else {
+        //     setSelectedUsers([...selectedUsers, userId]);
+        // }
+    };
+    const handlecreategrp = (e) => {
+        // e.preventDefault()
+        // if (selectedUsers.length < 2) {
+        //     alert('Please Select atleast 3 users to create a group')
+        // }
+        // else {
+        //     dispatch(creategrpchat(gname, selectedUsers))
+        //     setgrpchat(false)
+        //     setmenu(false)
+        //     setSelectedUsers([])
+        //     setgname('')
+        // }
+    };
+
+    const user = useQuery('fetchuser', fetchuser)
+
+    const userlist = useQuery('fetchuserlist', fetchuserlist,
+        {
+            onSuccess:(data) => console.log(data.data.items)
+        }
+    )
 
     useEffect(() => {
-        // dispatch(fetchuser())
-        // dispatch(fetchuserlist());
         const handleClickOutside = (event) => {
             if (addRef.current && !addRef.current.contains(event.target)) {
                 setadd(false);
@@ -86,7 +94,7 @@ const Navbar = () => {
             {add &&
                 <div className='add' ref={addRef}>
                     {
-                        userlist.map((u) => (
+                        userlist.data.items.map((u) => (
                             <div key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
                                 <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" alt="" />
                                 <span>{u.user.login}</span>
@@ -97,7 +105,7 @@ const Navbar = () => {
             }
             {grpchat &&
                 <div className='add' ref={addRef}>
-                    <form onSubmit={handlecreategrp} className={style.form}>
+                    <form onSubmit={handlecreategrp}>
                         <input
                             type="text"
                             value={gname}
@@ -109,7 +117,7 @@ const Navbar = () => {
                     </form>
                     <hr style={{ width: '99%' }} />
                     {
-                        userlist.map((u) => (
+                        userlist.data.items.map((u) => (
                             <div
                                 key={u.user.id}
                                 className={style.ucon}

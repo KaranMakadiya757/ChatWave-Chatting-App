@@ -1,6 +1,6 @@
-import style from "./Chatlist.module.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { setselecteduser } from "../App/APISlice";
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setselecteduser } from "../App/APISlice";
+import './Sidebar.css'
 
 const Chatlist = () => {
   const data = useSelector(state => state.API.dialoglist);

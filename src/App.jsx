@@ -6,6 +6,7 @@ import Welcome from './components/Welcome/Welcome'
 import Login from './components/Login and Register/Login'
 import Register from './components/Login and Register/Register'
 import { ToastContainer } from 'react-toastify';
+import Home from './components/Home/Home';
 
 function App() {
   const Client = new QueryClient()
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />
+  },
+  {
+    path: '/home',
+    element: <Home />
   },
 ])
 

@@ -16,5 +16,5 @@ export const Slice = createSlice({
     },
 });
 
-export const { settoken, setuserid } = dataSlice.actions;
-export default dataSlice.reducer;
+export const { settoken, setuserid } = Slice.actions;
+export default Slice.reducer;

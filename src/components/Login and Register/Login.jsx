@@ -37,7 +37,10 @@ const Login = () => {
     const login = useMutation('Login_User', Login_User,
         {
             retry: false,
-            onSuccess: (data) => console.log(data),
+            onSuccess: (data) => {
+                sessionStorage.setItem('userid', data.data.session.user_id)
+                sessionStorage.setItem('QBtoken', data.data.session.token)
+            },
             onError: (err) => {
                 const errmsg = err.response.data.errors.base ? err.response.data.errors.base.map(i => i) : err.response.data.errors.map(i => i)
                 toast.error(`Oops! 😐 ${errmsg}`, {
