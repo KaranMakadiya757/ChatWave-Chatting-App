@@ -22,7 +22,8 @@
     .left img {
         width: 100%;
         place-self: center;
-        filter: drop-shadow(3px 3px 6px #b8b9be);
+        cursor: pointer;
+        filter: drop-shadow(3px 3px 0px #b8b9be);
     }
 
     .login_wrapper .right {

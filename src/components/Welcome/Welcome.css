@@ -9,7 +9,15 @@
     place-self: center;
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    align-items: center;
+}
+
+.wrapper video{
+    width: 300px;
+    background: transparent;
+}
+.wrapper img{
+    width: 20%;
 }
 
 .wrapper h1 {

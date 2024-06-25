@@ -51,7 +51,7 @@ const Register = () => {
         <div className='register_container'>
             <div className='register_wrapper'>
                 <div className="left">
-                    <img src={logo} />
+                    <img src={logo} onClick={() => nev('/')}/>
                 </div>
                 <div className="right">
                     <form onSubmit={(e) => handlesubmit(e)}>
@@ -94,29 +94,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-// const createuser = async () => {
-//     try {
-//         const res = await axios.post("https://api.quickblox.com/users.json",
-//             { user: data },
-//             {
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     Authorization: "ApiKey HnJNFUUkVXV_jEdPsqcrAWxBzAF-srn_QMu2EXkm81Y",
-//                 }
-//             }
-//         );
-//         if (res) {
-//             console.log(res)
-
-//             setdata({ login: "", password: "" });
-//             setapierr('');
-//             nev('/login');
-//         }
-//     } catch (error) {
-//         if (error.response.data.errors.login[0] === 'has already been taken') {
-//             setapierr('Username Has already Been Taken by someone')
-//         }
-//     }
-// };

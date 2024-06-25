@@ -23,6 +23,7 @@
     .left img {
         width: 100%;
         place-self: center;
+        cursor: pointer;
         filter: drop-shadow(3px 3px 6px #b8b9be);
     }
 
