@@ -1,5 +1,6 @@
 * {
   font-family: 'Regular';
+  background-color: var(--soft);
 }
 
 :root {
@@ -39,6 +40,11 @@
   --gray-600: #93a5be;
   --gray-700: #66799e;
   --gray-800: #525480;
+  --shadow-1: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  --shadow-1-inset:inset 5px 5px 15px #bebebe,inset -5px -5px 15px #ffffff;
+  --shadow-2: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+  --shadow-2-inset:inset 3px 3px 6px #b8b9be,inset -3px -3px 6px #fff;
+  --shadow-input: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
 
   font-size: 4px;
 }

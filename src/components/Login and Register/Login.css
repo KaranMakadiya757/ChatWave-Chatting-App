@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     display: grid;
-    background-color: var(--soft);
+    /* background-color: var(--soft); */
 
     .login_wrapper {
         width: 50%;
@@ -11,7 +11,7 @@
         display: flex;
         padding: 20px 60px;
         border-radius: 10px;
-        box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+        box-shadow: var(--shadow-1);
     }
 
     .login_wrapper .left {
@@ -23,7 +23,6 @@
         width: 100%;
         place-self: center;
         cursor: pointer;
-        filter: drop-shadow(3px 3px 0px #b8b9be);
     }
 
     .login_wrapper .right {
@@ -66,7 +65,7 @@
         margin-bottom: 10px;
         background: transparent;
         outline: none;
-        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+        box-shadow: var(--shadow-input);
         transition: box-shadow 0.3s ease;
         font-family: 'SemiBold';
         font-size: 4rem;
@@ -111,20 +110,20 @@
         border-radius: 8px;
         width: 100%;
         cursor: pointer;
-        box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+        box-shadow: var(--shadow-2);
         font-family: 'SemiBold';
         font-size: 5rem;
         letter-spacing: 0.08em;
         color: var(--gray);
 
         &:hover {
-            box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
+            box-shadow: var(--shadow-2-inset);
 
         }
 
         &:disabled {
             cursor: not-allowed;
-            box-shadow: inset 3px 3px 6px #b8b9be, inset -3px -3px 6px #fff;
+            box-shadow: var(--shadow-2-inset);
         }
     }
 
