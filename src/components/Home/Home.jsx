@@ -21,8 +21,8 @@ const Home = () => {
     // }, [id._id, dispatch]);
 
     return (
-        <div className='container'>
-            <div className='wrapper'>
+        <div className='home_container'>
+            <div className='home_wrapper'>
                 <Sidebar />
                 {/* <Chats /> */}
             </div>

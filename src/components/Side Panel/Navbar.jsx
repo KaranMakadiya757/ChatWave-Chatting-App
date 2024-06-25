@@ -54,13 +54,13 @@ const Navbar = () => {
         // }
     };
 
-    const user = useQuery('fetchuser', fetchuser)
-
-    const userlist = useQuery('fetchuserlist', fetchuserlist,
+    const user = useQuery('fetchuser', fetchuser,
         {
-            onSuccess:(data) => console.log(data.data.items)
+            onSuccess: data => console.log(data)
         }
     )
+
+    const userlist = useQuery('fetchuserlist', fetchuserlist)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -80,7 +80,7 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <span>{user.login}</span>
+            <span>{user.isSuccess && user.data.data.user.login}</span>
             <div className='navwrapper'>
                 <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />
             </div>
@@ -94,7 +94,7 @@ const Navbar = () => {
             {add &&
                 <div className='add' ref={addRef}>
                     {
-                        userlist.data.items.map((u) => (
+                        userlist.data.data.items.map((u) => (
                             <div key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
                                 <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" alt="" />
                                 <span>{u.user.login}</span>
@@ -117,7 +117,7 @@ const Navbar = () => {
                     </form>
                     <hr style={{ width: '99%' }} />
                     {
-                        userlist.data.items.map((u) => (
+                        userlist.data.data.items.map((u) => (
                             <div
                                 key={u.user.id}
                                 className={style.ucon}

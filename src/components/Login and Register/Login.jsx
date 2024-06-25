@@ -40,6 +40,7 @@ const Login = () => {
             onSuccess: (data) => {
                 sessionStorage.setItem('userid', data.data.session.user_id)
                 sessionStorage.setItem('QBtoken', data.data.session.token)
+                nev('/home')
             },
             onError: (err) => {
                 const errmsg = err.response.data.errors.base ? err.response.data.errors.base.map(i => i) : err.response.data.errors.map(i => i)

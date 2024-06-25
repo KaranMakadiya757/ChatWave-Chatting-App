@@ -1,12 +1,12 @@
-.container{
+.home_container {
     width: 100%;
     height: 100vh;
     position: relative;
-}
 
-.wrapper{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    overflow: hidden;
+    .home_wrapper {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        overflow: hidden;
+    }
 }
