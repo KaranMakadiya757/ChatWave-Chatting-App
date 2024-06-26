@@ -38,6 +38,10 @@ const router = createBrowserRouter([
     path: '/home',
     element: <Home />
   },
+  {
+    path: '/home/:id',
+    element: <Home />
+  }
 ])
 
 export default App

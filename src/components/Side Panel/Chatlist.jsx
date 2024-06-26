@@ -1,23 +1,24 @@
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setselecteduser } from "../App/APISlice";
-import { useQuery, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
+import { useQuery } from 'react-query';
+import { setselecteduser } from '../../components/App/Slice'
 import { fetchdialoglist } from '../API/APICalls';
 import './Sidebar.css'
+import { useNavigate } from 'react-router-dom';
 
 const Chatlist = () => {
-  const queryclient = useQueryClient()
-  // const data = useSelector(state => state.API.dialoglist);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const nev = useNavigate();
 
   const handleclick = (data) => {
-    // dispatch(setselecteduser(data));
+    console.log(data)
+    nev(`/home/${data._id}`)
+    dispatch(setselecteduser(data));
   }
 
   const dialoglist = useQuery('fetchdialoglist', fetchdialoglist)
 
   return (
     <div className='chatlist'>
-      {console.log(dialoglist.data)}
       {dialoglist.isSuccess && dialoglist.data.data.items.map((d) => (
         <div key={d._id} className='chat' onClick={() => handleclick(d)}>
           <img src='https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg' />

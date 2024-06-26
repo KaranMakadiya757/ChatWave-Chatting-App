@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import style from "./Input.module.css";
 import { IoSend } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
-import { useSelector, useDispatch } from "react-redux";
-import { createmsg } from '../App/APISlice';
+import { useSelector } from "react-redux";
+import { createmsg } from '../API/APICalls'
+import './Chats.css'
+import { useMutation } from 'react-query';
+import { useParams } from 'react-router-dom';
 
 const Input = () => {
-    const user = useSelector(state => state.API.selecteduser)
+    const user = useSelector(state => state.data.selecteduser)
     const [message, setmessage] = useState("");
-    const dispatch = useDispatch();
+    const params = useParams()
+    const create_message = useMutation('create_message', createmsg)
 
     const handlechange = (e) => {
         setmessage(e.target.value);
     };
-    const handlefileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
     const handlesubmit = (e) => {
         e.preventDefault();
-        // console.log(file.name)
-        // console.log(message)
-        // dispatch(createfile(file.name));
-        dispatch(createmsg(user._id, message))
+        console.log(message)
+        create_message.mutate({
+            chat_dialog_id: params.id,
+            message: message
+        })
         setmessage("");
     };
 
@@ -35,7 +36,6 @@ const Input = () => {
                     type="file"
                     id='file'
                     style={{ display: 'none' }}
-                    onChange={handlefileChange}
                 />
                 <input
                     value={message}

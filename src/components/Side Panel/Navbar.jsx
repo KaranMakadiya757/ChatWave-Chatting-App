@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
 import { MdLogout, MdGroups, MdAddCircleOutline } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
-import { useQuery } from 'react-query';
-import { fetchuser, fetchuserlist } from '../API/APICalls';
+import { useMutation, useQuery } from 'react-query';
+import { createchat, fetchuser, fetchuserlist } from '../API/APICalls';
 import './Sidebar.css'
 // import { fetchuserlist, fetchuser, createchat, creategrpchat } from '../App/APISlice';
 
@@ -21,12 +21,15 @@ const Navbar = () => {
     const nev = useNavigate();
     const addRef = useRef(null);
 
+    const create_chat = useMutation('createchat', createchat)
+
     const handlelogout = () => {
         // sessionStorage.removeItem('userid');
         // sessionStorage.removeItem('QBtoken');
         // nev('/login');
     }
     const handleadd = (user) => {
+        create_chat.mutate(user.user.id)
         // console.log(user.user.id)
         // dispatch(createchat(user.user.id))
         // setadd(false)
@@ -54,11 +57,7 @@ const Navbar = () => {
         // }
     };
 
-    const user = useQuery('fetchuser', fetchuser,
-        {
-            onSuccess: data => console.log(data)
-        }
-    )
+    const user = useQuery(['fetchuser', sessionStorage.getItem('userid')],fetchuser)
 
     const userlist = useQuery('fetchuserlist', fetchuserlist)
 

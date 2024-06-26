@@ -1,5 +1,6 @@
 import axios from 'axios'
 import CryptoJS from 'crypto-js';
+import { useQuery } from 'react-query';
 
 /* -------------------------------- REGISTER NEW USER -------------------------------- */
 
@@ -86,6 +87,17 @@ export const creategrpchat = (name, ids) => {
 
 /* -------------------------------- FETCH DIALOGLIST -------------------------------- */
 
+export const fetchdialog = ({ queryKey }) => {
+    const [_, id] = queryKey;
+    return axios.get(`${import.meta.env.VITE_API_URL}/chat/Dialog.json?_id=${id}`,
+        {
+            headers: {
+                'QB-Token': sessionStorage.getItem('QBtoken')
+            }
+        })
+};
+/* -------------------------------- FETCH DIALOGLIST -------------------------------- */
+
 export const fetchdialoglist = () => {
     return axios.get(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`,
         {
@@ -97,12 +109,8 @@ export const fetchdialoglist = () => {
 
 /* -------------------------------- CREATE A MESSAGE -------------------------------- */
 
-export const createmsg = (id, msg) => {
-    return axios.post(`${import.meta.env.VITE_API_URL}/chat/Message.json`,
-        {
-            chat_dialog_id: id,
-            message: msg
-        },
+export const createmsg = (data) => {
+    return axios.post(`${import.meta.env.VITE_API_URL}/chat/Message.json`, data,
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -112,7 +120,8 @@ export const createmsg = (id, msg) => {
 };
 /* -------------------------------- FETCH MESSAGELIST FOR A DIALOG -------------------------------- */
 
-export const fetchmsglist = (id) => {
+export const fetchmsglist = ({ queryKey }) => {
+    const [, id] = queryKey
     return axios.get(`${import.meta.env.VITE_API_URL}/chat/Message.json?chat_dialog_id=${id}`,
         {
             headers: {
