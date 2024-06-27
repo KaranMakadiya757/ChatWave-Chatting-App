@@ -6,16 +6,15 @@ import { get_messagelist, get_user } from '../API/APICalls';
 
 // CSS 
 import './Chats.css'
-import { format, isEqual } from 'date-fns';
+import { addDays, format } from 'date-fns';
 
 const Message = ({ type, id }) => {
     const [username, setusername] = useState({})
 
-    let lastdate = new Date() + 1
-
+    let lastdate = addDays(new Date(), 1)
     const messagesEndRef = useRef(null);
 
-    const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist)
+    const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist, { refetchOnWindowFocus: false, refetchInterval: 1000})
 
     useEffect(() => {
         if (messagesEndRef.current) {

@@ -35,7 +35,7 @@ export const Login_User = (logindata) => {
 
 /* -------------------------------- FETCH SINGLE USER DATA -------------------------------- */
 
-export const get_user = ({queryKey}) => {
+export const get_user = ({ queryKey }) => {
     const [, id] = queryKey
     return axios.get(`${import.meta.env.VITE_API_URL}/users/${id}.json`,
         {
@@ -71,13 +71,8 @@ export const create_chat = (id) => {
 
 /* -------------------------------- CRETAE GROUP CHAT DIALOG -------------------------------- */
 
-export const create_group_chat = (name, ids) => {
-    return axios.post(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`,
-        {
-            type: 2,
-            name: name,
-            occupants_ids: ids,
-        },
+export const create_group_chat = (data) => {
+    return axios.post(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`, data,
         {
             headers: {
                 'Content-Type': 'application/json',

@@ -24,7 +24,8 @@ const Chats = () => {
     get_dialog,
     {
       enabled: !!params.id,
-      keepPreviousData: true
+      keepPreviousData: true,
+      refetchOnWindowFocus: false
     })
 
   return (
