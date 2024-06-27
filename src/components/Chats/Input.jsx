@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+
+// REACT-ICONS 
 import { IoSend } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
-import { useSelector } from "react-redux";
-import { createmsg } from '../API/APICalls'
-import './Chats.css'
+
+// REACT-QUERY AND FUNCTION 
+import { create_chat, create_message } from '../API/APICalls'
 import { useMutation } from 'react-query';
-import { useParams } from 'react-router-dom';
 
-const Input = () => {
-    const user = useSelector(state => state.data.selecteduser)
+// CSS 
+import './Chats.css'
+
+const Input = ({ id }) => {
+
     const [message, setmessage] = useState("");
-    const params = useParams()
-    const create_message = useMutation('create_message', createmsg)
 
-    const handlechange = (e) => {
-        setmessage(e.target.value);
-    };
+    // CREATE CHAT FUNCTION 
+    const {mutate: newmsg} = useMutation('create_message', create_message)
+
+    // HANDLE MESSAGE SEND 
     const handlesubmit = (e) => {
         e.preventDefault();
-        console.log(message)
-        create_message.mutate({
-            chat_dialog_id: params.id,
+
+        newmsg({
+            chat_dialog_id: id,
             message: message
         })
+
         setmessage("");
     };
 
@@ -41,10 +45,10 @@ const Input = () => {
                     value={message}
                     type="text"
                     placeholder="Type your message"
-                    onChange={handlechange}
+                    onChange={(e) => setmessage(e.target.value)}
                     required
                 />
-                <button type="submit"> <IoSend /> </button>
+                <button> <IoSend /> </button>
             </form>
         </div>
     )

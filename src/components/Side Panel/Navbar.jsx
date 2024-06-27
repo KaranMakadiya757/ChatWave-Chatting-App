@@ -1,48 +1,61 @@
 import React, { useState, useRef, useEffect } from 'react'
+
+// REACT-ROUTER-DOM 
 import { useNavigate } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+
+// REACT-QUERY AND FUNCTION
+import { useMutation, useQuery } from 'react-query';
+import { create_chat, get_user, get_userlist } from '../API/APICalls';
+
+// REACT ICONS 
 import { MdLogout, MdGroups, MdAddCircleOutline } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
-import { useMutation, useQuery } from 'react-query';
-import { createchat, fetchuser, fetchuserlist } from '../API/APICalls';
-import './Sidebar.css'
-// import { fetchuserlist, fetchuser, createchat, creategrpchat } from '../App/APISlice';
 
+// CSS 
+import './Sidebar.css'
 
 
 const Navbar = () => {
     const [add, setadd] = useState(false);
     const [grpchat, setgrpchat] = useState(false);
+
+    const [groupinfo, setgroupinfo] = useState({ type: 2, name: '', occupants_ids: [] })
+
     const [gname, setgname] = useState('');
     const [menu, setmenu] = useState(false);
     const [selectedUsers, setSelectedUsers] = useState([]);
-    // const user = useSelector(state => state.API.userinfo);
-    // const userlist = useSelector(state => state.API.userlist)
+
+    const user = useQuery(['user', sessionStorage.getItem('userid')], get_user)
+    const userlist = useQuery('userlist', get_userlist)
+    const newchat = useMutation('create_chat', create_chat)
+
     const nev = useNavigate();
     const addRef = useRef(null);
 
-    const create_chat = useMutation('createchat', createchat)
 
     const handlelogout = () => {
-        // sessionStorage.removeItem('userid');
-        // sessionStorage.removeItem('QBtoken');
-        // nev('/login');
+        sessionStorage.removeItem('userid');
+        sessionStorage.removeItem('QBtoken');
+        nev('/login');
     }
+
     const handleadd = (user) => {
-        create_chat.mutate(user.user.id)
-        // console.log(user.user.id)
-        // dispatch(createchat(user.user.id))
-        // setadd(false)
-        // setmenu(false)
+        newchat.mutate(user.user.id)
+        setadd(false)
+        setmenu(false)
     }
+
+
     const handlegrp = (userId) => {
-        // console.log(userId)
-        // if (selectedUsers.includes(userId)) {
-        //     setSelectedUsers(selectedUsers.filter(id => id !== userId));
-        // } else {
-        //     setSelectedUsers([...selectedUsers, userId]);
-        // }
-    };
+        (groupinfo.occupants_ids.includes(userId)) ?
+            setgroupinfo({ ...groupinfo, occupants_ids: occupants_ids.filter(id => id !== userId) }) :
+            setSelectedUsers({ ...groupinfo, occupants_ids: [...occupants_ids, userId]})
+
+        // (selectedUsers.includes(userId)) ?
+        //     setSelectedUsers(selectedUsers.filter(id => id !== userId)) :
+        //     setSelectedUsers([...selectedUsers, userId])
+    }
+
     const handlecreategrp = (e) => {
         // e.preventDefault()
         // if (selectedUsers.length < 2) {
@@ -57,9 +70,7 @@ const Navbar = () => {
         // }
     };
 
-    const user = useQuery(['fetchuser', sessionStorage.getItem('userid')],fetchuser)
 
-    const userlist = useQuery('fetchuserlist', fetchuserlist)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -109,7 +120,7 @@ const Navbar = () => {
                             type="text"
                             value={gname}
                             placeholder='Group Name'
-                            onChange={(e) => setgname(e.target.value)}
+                            onChange={(e) => setgroupinfo({ ...groupinfo, name: e.target.value })}
                             required
                         />
                         <input type="submit" value="Create" className='button' />

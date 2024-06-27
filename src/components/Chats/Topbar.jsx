@@ -1,69 +1,64 @@
-import React from 'react'
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useRef, useEffect } from 'react'
+
+// REACT ICONS 
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
-import { useState, useRef, useEffect } from "react";
-// import { deletechat, setselecteduser } from "../App/APISlice";
+
+// REACT-QUERY AND FUNCTION 
+import { useMutation } from 'react-query';
+import { delete_chat } from '../API/APICalls';
+
+// REACT-ROUTER-DOM 
+import { useNavigate } from 'react-router-dom';
+
+// CSS 
 import './Chats.css'
-import { useLocation, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { fetchdialog, fetchuser } from '../API/APICalls';
 
-const Topbar = () => {
-  const [data, setdata] = useState({name: undefined, _id: ''})
-  const [menu, setmenu] = useState(false);
-  const addRef = useRef(null);
-  const params = useParams()
+const Topbar = ({ name, id }) => {
+    const [menu, setmenu] = useState(false);
+    const ref = useRef(null);
+    const ref2 = useRef(null);
+    const nav = useNavigate()
 
+    const { mutate } = useMutation("delete_chat", delete_chat,
+        {
+            onSuccess: () => nav('/home')
+        }
+    )
 
-  useQuery(['fetchdialog', params.id], fetchdialog,
-    {
-      enabled: !!params.id,
-      onSuccess: d => setdata(d.data.items[0]),
-      keepPreviousData: true
-    })
-
-  const handleclick = (data) => {
-    // setmenu(false);
-    // if (data === '661dffe332eaaf0042d44756') {
-    //   alert('You can not delete a public chat')
-    // }
-    // else {
-    //   dispatch(deletechat(data));
-    //   dispatch(setselecteduser({}))
-    // }
-
-  }
-
-  useEffect(() => {
-
-    const handleClickOutside = (event) => {
-      if (addRef.current && !addRef.current.contains(event.target)) {
+    const handleclick = () => {
         setmenu(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [addRef]);
+        mutate(id)
+    }
 
-  return (
-    <div className='topbar_container'>
-      <div className='topbar_chats'>
-        <div className='divleft'>
-          {data.name && <img src='https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg' />}
-          <span>{data.name}</span>
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target) && !ref2.current.contains(event.target)) {
+                setmenu(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+    }, [ref, ref2])
+
+    return (
+        <div className='topbar_container'>
+            <div className='topbar_chats'>
+                <div className='divleft'>
+                    <img src='https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg' />
+                    <span>{name}</span>
+                </div>
+                <span ref={ref2}><HiDotsVertical className='icon' onClick={() => setmenu(!menu)} /></span>
+                {menu &&
+                    <div className='menu' ref={ref} onClick={() => handleclick(id)}>
+                        <MdDelete style={{ color: 'white' }} />
+                        <span>Delete Chat</span>
+                    </div>}
+            </div>
         </div>
-        {data.name && <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />}
-        {menu &&
-          <div className='menu' ref={addRef} onClick={() => handleclick(data._id)}>
-            <MdDelete style={{ color: 'white' }} />
-            <span>Delete Chat</span>
-          </div>}
-      </div>
-    </div>
-  )
+    )
 }
 
 export default Topbar

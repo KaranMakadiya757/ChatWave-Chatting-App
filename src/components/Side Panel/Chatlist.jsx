@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useQuery } from 'react-query';
 import { setselecteduser } from '../../components/App/Slice'
-import { fetchdialoglist } from '../API/APICalls';
+import { get_dialoglist } from '../API/APICalls';
 import './Sidebar.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const Chatlist = () => {
     dispatch(setselecteduser(data));
   }
 
-  const dialoglist = useQuery('fetchdialoglist', fetchdialoglist)
+  const dialoglist = useQuery('get_dialoglist', get_dialoglist)
 
   return (
     <div className='chatlist'>

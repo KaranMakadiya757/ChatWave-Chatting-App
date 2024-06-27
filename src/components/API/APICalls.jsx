@@ -35,8 +35,9 @@ export const Login_User = (logindata) => {
 
 /* -------------------------------- FETCH SINGLE USER DATA -------------------------------- */
 
-export const fetchuser = () => {
-    return axios.get(`${import.meta.env.VITE_API_URL}/users/${sessionStorage.getItem('userid')}.json`,
+export const get_user = ({queryKey}) => {
+    const [, id] = queryKey
+    return axios.get(`${import.meta.env.VITE_API_URL}/users/${id}.json`,
         {
             headers: { Authorization: `ApiKey ${import.meta.env.VITE_API_KEY}` }
         })
@@ -44,7 +45,7 @@ export const fetchuser = () => {
 
 /* -------------------------------- FETCH USER LIST -------------------------------- */
 
-export const fetchuserlist = () => {
+export const get_userlist = () => {
     return axios.get(`${import.meta.env.VITE_API_URL}/users.json?filter[]=number+id+ne+${sessionStorage.getItem('userid')}&order=asc+ string +login`,
         {
             params: { per_page: 100 },
@@ -54,7 +55,7 @@ export const fetchuserlist = () => {
 
 /* -------------------------------- CRETAE PERSONAL CHAT DIALOG -------------------------------- */
 
-export const createchat = (id) => {
+export const create_chat = (id) => {
     return axios.post(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`,
         {
             type: 3,
@@ -70,7 +71,7 @@ export const createchat = (id) => {
 
 /* -------------------------------- CRETAE GROUP CHAT DIALOG -------------------------------- */
 
-export const creategrpchat = (name, ids) => {
+export const create_group_chat = (name, ids) => {
     return axios.post(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`,
         {
             type: 2,
@@ -87,7 +88,7 @@ export const creategrpchat = (name, ids) => {
 
 /* -------------------------------- FETCH DIALOGLIST -------------------------------- */
 
-export const fetchdialog = ({ queryKey }) => {
+export const get_dialog = ({ queryKey }) => {
     const [_, id] = queryKey;
     return axios.get(`${import.meta.env.VITE_API_URL}/chat/Dialog.json?_id=${id}`,
         {
@@ -98,7 +99,7 @@ export const fetchdialog = ({ queryKey }) => {
 };
 /* -------------------------------- FETCH DIALOGLIST -------------------------------- */
 
-export const fetchdialoglist = () => {
+export const get_dialoglist = () => {
     return axios.get(`${import.meta.env.VITE_API_URL}/chat/Dialog.json`,
         {
             headers: {
@@ -109,7 +110,7 @@ export const fetchdialoglist = () => {
 
 /* -------------------------------- CREATE A MESSAGE -------------------------------- */
 
-export const createmsg = (data) => {
+export const create_message = (data) => {
     return axios.post(`${import.meta.env.VITE_API_URL}/chat/Message.json`, data,
         {
             headers: {
@@ -120,7 +121,7 @@ export const createmsg = (data) => {
 };
 /* -------------------------------- FETCH MESSAGELIST FOR A DIALOG -------------------------------- */
 
-export const fetchmsglist = ({ queryKey }) => {
+export const get_messagelist = ({ queryKey }) => {
     const [, id] = queryKey
     return axios.get(`${import.meta.env.VITE_API_URL}/chat/Message.json?chat_dialog_id=${id}`,
         {
@@ -132,7 +133,7 @@ export const fetchmsglist = ({ queryKey }) => {
 
 /* -------------------------------- DELETE CHAT DIALOG -------------------------------- */
 
-export const deletechat = (id) => {
+export const delete_chat = (id) => {
     return axios.delete(`https://api.quickblox.com/chat/Dialog/${id}`, {
         headers: {
             'Content-Type': 'application/json',
