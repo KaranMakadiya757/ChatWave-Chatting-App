@@ -1,46 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // REACT-QUERY AND FUNCTION 
-import { useQueries, useQuery } from 'react-query';
-import { get_messagelist, get_user } from '../API/APICalls';
+import { useQuery } from 'react-query';
+import { get_messagelist, get_userlist } from '../API/APICalls';
 
 // CSS 
 import './Chats.css'
 import { addDays, format } from 'date-fns';
 
-const Message = ({ type, id }) => {
-    const [username, setusername] = useState({})
-
+const Message = ({ type, id, bottomref }) => {
     let lastdate = addDays(new Date(), 1)
-    const messagesEndRef = useRef(null);
+    const ref2 = useRef(null)
 
-    const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist, { refetchOnWindowFocus: false, refetchInterval: 1000})
+    const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist,
+        {
+            refetchOnWindowFocus: false,
+            refetchInterval: 1000,
+            enabled: !!id
+        })
 
-    useEffect(() => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView();
-        }
-
-        if (type !== 3) {
-            // msg.data.items.map(m => {
-            //     const id = m.sender_id;
-
-            //     const {data} = useQuery(['get_username', m.sender_id], get_user,
-            //         {
-            //             onSuccess: d => d
-            //         }
-            //     )
-            // const res = axios.get(`https://api.quickblox.com/users/${id}.json`, {
-            //     headers: {
-            //         Authorization: 'ApiKey HnJNFUUkVXV_jEdPsqcrAWxBzAF-srn_QMu2EXkm81Y'
-            //     }
-            // })
-            // if (!(id in username)) {
-            //     setusername(prev => ({ ...prev, [id]: res.data.user.login }))
-            // }
-            // })
-        }
-    }, []);
+    const { data: userlist } = useQuery('userlist', get_userlist,
+        {
+            refetchOnWindowFocus: false,
+        })
 
     const displayDateIfNeeded = (date) => {
         if ((format(date, "dd-MM-yyyy") !== format(lastdate, "dd-MM-yyyy"))) {
@@ -48,10 +30,15 @@ const Message = ({ type, id }) => {
             return format(date, "dd-MM")
         }
     }
+    useEffect(() => {
+        if (ref2.current) {
+          ref2.current.scrollTop = ref2.current.scrollHeight;
+        }
+      }, [])
 
-    const getusername = (id) => {
-        // return <div className='time'>{username[id]}</div>;
-    }
+    useEffect(() => {
+        bottomref.current?.scrollIntoView()
+    }, [])
 
     return (
         <div className='msglist'>
@@ -64,14 +51,14 @@ const Message = ({ type, id }) => {
                         <div className='msgbox'>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 {format(d.created_at, "HH:mm")}
-                                {type !== 3 && getusername(d.sender_id)}
+                                {type !== 3 && userlist.data.items.filter(i => i.user.id === d.sender_id)[0].user.login}
                             </div>
                             <p>{d.message}</p>
                         </div>
                     </div>
                 </div>
             ))}
-            <div ref={messagesEndRef} />
+            <div ref={bottomref} />
         </div>
     );
 }

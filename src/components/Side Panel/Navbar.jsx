@@ -24,15 +24,19 @@ const Navbar = () => {
     // NEW GROUP INFO 
     const [groupinfo, setgroupinfo] = useState({ type: 2, name: '', occupants_ids: [] })
 
-    // API CALLS FOR USER, USERLIST, NEW PERSONAL AND GROUP CHATS 
-    const user = useQuery(['user', sessionStorage.getItem('userid')], get_user, { refetchOnWindowFocus: false })
-    const userlist = useQuery('userlist', get_userlist, { refetchOnWindowFocus: false })
-    const newchat = useMutation('create_chat', create_chat)
-    const newgroup = useMutation('create_group_chat', create_group_chat)
-
     // NAVIGATION AND REFERENCE VARIABLES 
     const nev = useNavigate();
     const addRef = useRef(null);
+
+    // API CALLS FOR USER, USERLIST, NEW PERSONAL AND GROUP CHATS 
+    const user = useQuery(['user', sessionStorage.getItem('userid')], get_user, { refetchOnWindowFocus: false })
+    const userlist = useQuery('userlist', get_userlist, { refetchOnWindowFocus: false })
+    const newchat = useMutation('create_chat', create_chat, {
+        onSuccess: (data) => nev(`/home/${data.data._id}`)
+    })
+    const newgroup = useMutation('create_group_chat', create_group_chat, {
+        onSuccess: (data) => nev(d`/home/${data.data._id}`)
+    })
 
 
     // HANDLING THE LOGOUT FUNCTIONALITY 
@@ -51,9 +55,10 @@ const Navbar = () => {
 
     // HANDLING GROUP CREATION FUNCTIONALITY 
     const handlegrp = (userId) => {
+        console.log(groupinfo.occupants_ids.includes(userId));
         (groupinfo.occupants_ids.includes(userId)) ?
             setgroupinfo({ ...groupinfo, occupants_ids: groupinfo.occupants_ids.filter(id => id !== userId) }) :
-            setSelectedUsers({ ...groupinfo, occupants_ids: groupinfo.occupants_ids.push(userId) })
+            setgroupinfo({ ...groupinfo, occupants_ids: [...groupinfo.occupants_ids, userId] })
     }
     const handlecreategrp = (e) => {
         e.preventDefault()
@@ -94,7 +99,7 @@ const Navbar = () => {
             {add &&
                 <div className='add' ref={addRef}>
                     {
-                        userlist.data.data.items.map((u) => (
+                        userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
                             <div key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
                                 <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" alt="" />
                                 <span>{u.user.login}</span>
@@ -117,7 +122,7 @@ const Navbar = () => {
                     </form>
                     <hr style={{ width: '99%' }} />
                     {
-                        userlist.data.data.items.map((u) => (
+                        userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
                             <div
                                 key={u.user.id}
                                 className="ucon"

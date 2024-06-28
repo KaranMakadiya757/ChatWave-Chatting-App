@@ -7,14 +7,14 @@
         width: 50%;
         gap: 20px;
         place-self: center;
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         padding: 20px 60px;
         border-radius: 10px;
         box-shadow: var(--shadow-1);
     }
 
     .register_wrapper .left {
-        flex: 1;
         display: grid;
     }
 
@@ -25,7 +25,6 @@
     }
 
     .register_wrapper .right {
-        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;

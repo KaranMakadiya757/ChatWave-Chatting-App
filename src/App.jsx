@@ -7,6 +7,7 @@ import Login from './components/Login and Register/Login'
 import Register from './components/Login and Register/Register'
 import { ToastContainer } from 'react-toastify';
 import Home from './components/Home/Home';
+import { AuthGuard, LoginAuth } from './components/Authguard/AuthGuard';
 
 function App() {
   const Client = new QueryClient()
@@ -24,23 +25,23 @@ function App() {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Welcome />
+    element: <LoginAuth><Welcome /></LoginAuth> 
   },
   {
     path: '/login',
-    element: <Login />
+    element: <LoginAuth><Login /></LoginAuth>
   },
   {
     path: '/register',
-    element: <Register />
+    element: <LoginAuth><Register /></LoginAuth>
   },
   {
     path: '/home',
-    element: <Home />
+    element: <AuthGuard><Home /></AuthGuard>
   },
   {
     path: '/home/:id',
-    element: <Home />
+    element: <AuthGuard><Home /></AuthGuard>
   }
 ])
 

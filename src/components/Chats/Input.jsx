@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // REACT-ICONS 
 import { IoSend } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
 
 // REACT-QUERY AND FUNCTION 
-import { create_chat, create_message } from '../API/APICalls'
+import { create_message } from '../API/APICalls'
 import { useMutation } from 'react-query';
 
 // CSS 
 import './Chats.css'
+import { useParams } from 'react-router-dom';
 
-const Input = ({ id }) => {
+const Input = ({ id, bottomref }) => {
 
     const [message, setmessage] = useState("");
+    const param = useParams()
 
     // CREATE CHAT FUNCTION 
-    const {mutate: newmsg} = useMutation('create_message', create_message)
+    const { mutate: newmsg, isSuccess } = useMutation('create_message', create_message)
 
     // HANDLE MESSAGE SEND 
     const handlesubmit = (e) => {
@@ -28,7 +30,11 @@ const Input = ({ id }) => {
         })
 
         setmessage("");
-    };
+    }
+
+    // useEffect(() => {
+    //     bottomref.current?.scrollIntoView()
+    // }, [isSuccess, id])
 
     return (
         <div className='input'>

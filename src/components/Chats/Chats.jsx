@@ -1,3 +1,5 @@
+import { useRef, useEffect } from "react";
+
 // COMPONENET IMPORT   
 import Input from "./Input";
 import Message from "./Message";
@@ -15,30 +17,30 @@ import './Chats.css'
 
 
 const Chats = () => {
-  // GETTING ID FROM URL 
-  const params = useParams()
+    const ref = useRef(null)
+    // GETTING ID FROM URL 
+    const params = useParams()
 
-  // FETCHING SELECTED DIALOG 
-  const { data, isSuccess } = useQuery(
-    ['get_dialog', params.id],
-    get_dialog,
-    {
-      enabled: !!params.id,
-      keepPreviousData: true,
-      refetchOnWindowFocus: false
-    })
+    // FETCHING SELECTED DIALOG 
+    const { data, isSuccess } = useQuery(
+        ['get_dialog', params.id],
+        get_dialog,
+        {
+            enabled: !!params.id,
+            refetchOnWindowFocus: false,
+        })
 
-  return (
-    <div className='chats_container'>
-      {isSuccess &&
-        <>
-          <Topbar name={data.data.items[0].name} id={data.data.items[0]._id} />
-          <Message id={data.data.items[0]._id} type={data.data.items[0].type} />
-          <Input id={data.data.items[0]._id} />
-        </>
-      }
-    </div>
-  );
+    return (
+        <div className='chats_container'>
+            {isSuccess &&
+                <>
+                    <Topbar name={data.data.items[0].name} id={data.data.items[0]._id} />
+                    <Message id={data.data.items[0]._id} type={data.data.items[0].type} bottomref={ref} />
+                    <Input id={data.data.items[0]._id} bottomref={ref} />
+                </>
+            }
+        </div>
+    );
 };
 
 export default Chats;

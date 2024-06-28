@@ -46,7 +46,7 @@ export const get_user = ({ queryKey }) => {
 /* -------------------------------- FETCH USER LIST -------------------------------- */
 
 export const get_userlist = () => {
-    return axios.get(`${import.meta.env.VITE_API_URL}/users.json?filter[]=number+id+ne+${sessionStorage.getItem('userid')}&order=asc+ string +login`,
+    return axios.get(`${import.meta.env.VITE_API_URL}/users.json?&order=asc+ string +login`,
         {
             params: { per_page: 100 },
             headers: { Authorization: `ApiKey ${import.meta.env.VITE_API_KEY}` }

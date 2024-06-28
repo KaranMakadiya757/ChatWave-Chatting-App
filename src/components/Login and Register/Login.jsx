@@ -1,9 +1,18 @@
 import { useState } from "react";
+
+// REACT ROUTER DOM 
 import { useNavigate, NavLink } from "react-router-dom";
+
+// REACT QUERY AND FUNCTION 
 import { useMutation } from "react-query";
 import { Login_User } from "../API/APICalls";
+
+// REACT ICON, TOASTIFY NOTIFICATION AND LOADER 
 import { FaUser, FaLock, FaUnlock } from "react-icons/fa6";
+import { bouncy } from "ldrs";
 import { toast } from "react-toastify";
+
+// IMAGES AND CSS 
 import logo from '../../assets/Photos/logo.png'
 import './Login.css'
 
@@ -11,7 +20,11 @@ const Login = () => {
     const [showpass, setshowpass] = useState(false)
     const [data, setdata] = useState({ login: "", password: "" });
     const [error, seterror] = useState({ login: false, password: false });
+
     const nev = useNavigate();
+    bouncy.register()
+
+    /* --------------------------- HNADLING THE LOGIN SUBMIT BUTTON --------------------------- */ 
 
     const handlesubmit = (e) => {
         e.preventDefault();
@@ -89,7 +102,7 @@ const Login = () => {
 
                         </div>
 
-                        <button className='button' disabled={login.isLoading}>{login.isLoading ? <span className="loading"></span> : 'LOGIN'}</button>
+                        <button className='button' disabled={login.isLoading}>{login.isLoading ? <l-bouncy size={30} speed={1} color='#44476A'></l-bouncy> : 'LOGIN'}</button>
                     </form>
                     <div className='msg'>Don't Have a Account? No worries <NavLink className='link' to='/register'>SignUp</NavLink></div>
                 </div>
