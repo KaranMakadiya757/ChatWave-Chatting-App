@@ -7,15 +7,16 @@ import { get_messagelist, get_userlist } from '../API/APICalls';
 // CSS 
 import './Chats.css'
 import { addDays, format } from 'date-fns';
+import { useLocation } from 'react-router-dom';
 
 const Message = ({ type, id, bottomref }) => {
     let lastdate = addDays(new Date(), 1)
+    const location = useLocation()
     const ref2 = useRef(null)
 
     const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist,
         {
-            refetchOnWindowFocus: false,
-            refetchInterval: 1000,
+            refetchInterval: 500,
             enabled: !!id
         })
 
@@ -30,15 +31,14 @@ const Message = ({ type, id, bottomref }) => {
             return format(date, "dd-MM")
         }
     }
-    useEffect(() => {
-        if (ref2.current) {
-          ref2.current.scrollTop = ref2.current.scrollHeight;
-        }
-      }, [])
 
     useEffect(() => {
-        bottomref.current?.scrollIntoView()
-    }, [])
+        const timer = setTimeout(() => {
+            bottomref.current?.scrollIntoView();
+        },300);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className='msglist'>
@@ -56,9 +56,10 @@ const Message = ({ type, id, bottomref }) => {
                             <p>{d.message}</p>
                         </div>
                     </div>
+                    <div ref={bottomref} />
                 </div>
             ))}
-            <div ref={bottomref} />
+            
         </div>
     );
 }

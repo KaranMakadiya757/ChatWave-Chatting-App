@@ -10,12 +10,10 @@ import { useMutation } from 'react-query';
 
 // CSS 
 import './Chats.css'
-import { useParams } from 'react-router-dom';
 
 const Input = ({ id, bottomref }) => {
 
     const [message, setmessage] = useState("");
-    const param = useParams()
 
     // CREATE CHAT FUNCTION 
     const { mutate: newmsg, isSuccess } = useMutation('create_message', create_message)
@@ -32,9 +30,9 @@ const Input = ({ id, bottomref }) => {
         setmessage("");
     }
 
-    // useEffect(() => {
-    //     bottomref.current?.scrollIntoView()
-    // }, [isSuccess, id])
+    useEffect(() => {
+        bottomref.current?.scrollIntoView()
+    }, [isSuccess, id])
 
     return (
         <div className='input'>
