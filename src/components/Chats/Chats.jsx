@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 // COMPONENET IMPORT   
 import Input from "./Input";
@@ -36,7 +36,7 @@ const Chats = () => {
                 <>
                     <Topbar name={data.data.items[0].name} id={data.data.items[0]._id} />
                     <Message id={data.data.items[0]._id} type={data.data.items[0].type} bottomref={ref} />
-                    <Input id={data.data.items[0]._id} bottomref={ref} />
+                    <Input id={data.data.items[0]._id} />
                 </>
             }
         </div>

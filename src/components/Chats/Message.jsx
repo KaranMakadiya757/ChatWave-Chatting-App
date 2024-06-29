@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // REACT-QUERY AND FUNCTION 
 import { useQuery } from 'react-query';
@@ -7,17 +7,18 @@ import { get_messagelist, get_userlist } from '../API/APICalls';
 // CSS 
 import './Chats.css'
 import { addDays, format } from 'date-fns';
-import { useLocation } from 'react-router-dom';
 
 const Message = ({ type, id, bottomref }) => {
+    const [messages, setmessages] = useState([])
     let lastdate = addDays(new Date(), 1)
-    const location = useLocation()
-    const ref2 = useRef(null)
 
     const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist,
         {
             refetchInterval: 500,
-            enabled: !!id
+            enabled: !!id,
+            onSuccess: (data) => {
+                if (messages !== data.data.items) setmessages(data.data.items)
+            }
         })
 
     const { data: userlist } = useQuery('userlist', get_userlist,
@@ -33,12 +34,8 @@ const Message = ({ type, id, bottomref }) => {
     }
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            bottomref.current?.scrollIntoView();
-        },300);
-
-        return () => clearTimeout(timer);
-    }, []);
+        bottomref.current?.scrollIntoView();
+    }, [messages]);
 
     return (
         <div className='msglist'>
@@ -56,10 +53,9 @@ const Message = ({ type, id, bottomref }) => {
                             <p>{d.message}</p>
                         </div>
                     </div>
-                    <div ref={bottomref} />
                 </div>
             ))}
-            
+            <div ref={bottomref} />
         </div>
     );
 }

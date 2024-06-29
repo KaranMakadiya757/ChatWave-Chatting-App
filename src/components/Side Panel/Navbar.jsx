@@ -85,7 +85,9 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
+
             <span>{user.isSuccess && user.data.data.user.login}</span>
+            
             <div className='navwrapper'>
                 <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />
             </div>
@@ -101,7 +103,7 @@ const Navbar = () => {
                     {
                         userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
                             <div key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
-                                <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" alt="" />
+                                <img src="https://as1.ftcdn.net/v2/jpg/05/90/59/88/1000_F_590598870_TOcGd4cUZzPoEMlxSc7XYwcupHOE0vLM.jpg" alt="" />
                                 <span>{u.user.login}</span>
                             </div>
                         ))

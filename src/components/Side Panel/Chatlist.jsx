@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import './Sidebar.css'
 
 const Chatlist = () => {
-  const nev = useNavigate();
-
+  const nev = useNavigate(); 
+  
   // FETCHING THE CHATS LIST FROM SERVER 
   const {data: dialoglist, isSuccess} = useQuery('get_dialoglist', get_dialoglist,
     {

@@ -11,12 +11,12 @@ import { useMutation } from 'react-query';
 // CSS 
 import './Chats.css'
 
-const Input = ({ id, bottomref }) => {
+const Input = ({ id }) => {
 
     const [message, setmessage] = useState("");
 
     // CREATE CHAT FUNCTION 
-    const { mutate: newmsg, isSuccess } = useMutation('create_message', create_message)
+    const { mutate: newmsg } = useMutation('create_message', create_message)
 
     // HANDLE MESSAGE SEND 
     const handlesubmit = (e) => {
@@ -29,10 +29,6 @@ const Input = ({ id, bottomref }) => {
 
         setmessage("");
     }
-
-    useEffect(() => {
-        bottomref.current?.scrollIntoView()
-    }, [isSuccess, id])
 
     return (
         <div className='input'>
