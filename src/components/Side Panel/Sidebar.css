@@ -1,59 +1,72 @@
 .sidebar {
-    height: 100vh;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    border: 1px solid black;
 }
 
 
 .navbar {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
-    height: 50px;
-    padding: 10px;
     justify-content: space-between;
+    position: relative;
+    box-shadow: var(--shadow-2-inset);
 
-
-    .navwrapper {
+    .DP {
+        background: transparent;
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
     }
 
-    span {
-        font-weight: bold;
-        font-size: 30px;
-        color: black;
+    .DP img {
+        width: 30px;
+        border-radius: 50%;
     }
 
-    .navwrapper .icon {
-        background: transparent;
-        /* color: antiquewhite; */
-        border: none;
-        font-weight: bolder;
-        font-size: larger;
+    .DP p {
+        font-family: "Bold";
+        font-size: 4rem;
+        letter-spacing: 1px;
+        color: var(--dark);
     }
 
-    .menu {
-        background-color: rgb(47, 47, 47);
-        padding: 10px;
-        height: auto;
-        width: auto;
-        color: black;
+    .menuicon {
+        font-size: 4rem;
+        color: var(--dark);
+        cursor: pointer;
+    }
+
+    ul.menu {
         position: absolute;
         top: 60px;
-        left: 240px;
+        right: 10px;
+        list-style: none;
+        margin: 0;
         border-radius: 10px;
+        display: grid;
+        gap: 10px;
     }
 
-    .menu .ucon {
+    ul.menu li {
+        font-family: "Bold";
+        font-size: 4rem;
+        letter-spacing: 1px;
+        color: var(--dark);
+        border-radius: 8px;
         display: flex;
         align-items: center;
-        padding: 10px 5px;
-        gap: 15px;
-        cursor: default;
-        border-radius: 10px;
-        /* color: white; */
+        justify-content: end;
+        gap: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+        box-shadow: var(--shadow-2);
 
         &:hover {
-            background-color: rgb(100, 100, 100);
+            box-shadow: var(--shadow-2-inset);
         }
 
     }

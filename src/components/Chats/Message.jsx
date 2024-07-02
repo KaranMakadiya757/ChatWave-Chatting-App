@@ -55,7 +55,7 @@ const Message = ({ type, id, bottomref }) => {
                     </div>
                 </div>
             ))}
-            <div ref={bottomref} />
+            <span ref={bottomref} />
         </div>
     );
 }

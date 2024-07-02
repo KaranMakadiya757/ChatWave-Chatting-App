@@ -11,7 +11,8 @@ import { create_chat, create_group_chat, get_user, get_userlist } from '../API/A
 import { MdLogout, MdGroups, MdAddCircleOutline } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
 
-// CSS 
+// CSS
+import DP from '../../assets/Photos/a5bc3d87-bd5e-498c-9365-78696a73d802.jpg'
 import './Sidebar.css'
 
 
@@ -27,6 +28,7 @@ const Navbar = () => {
     // NAVIGATION AND REFERENCE VARIABLES 
     const nev = useNavigate();
     const addRef = useRef(null);
+    const ref2 = useRef(null);
 
     // API CALLS FOR USER, USERLIST, NEW PERSONAL AND GROUP CHATS 
     const user = useQuery(['user', sessionStorage.getItem('userid')], get_user, { refetchOnWindowFocus: false })
@@ -69,7 +71,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (addRef.current && !addRef.current.contains(event.target)) {
+            if (addRef.current && !addRef.current.contains(event.target) && !ref2.current.contains(event.target)) {
                 setadd(false)
                 setmenu(false)
                 setgrpchat(false)
@@ -86,18 +88,23 @@ const Navbar = () => {
     return (
         <div className='navbar'>
 
-            <span>{user.isSuccess && user.data.data.user.login}</span>
-            
-            <div className='navwrapper'>
-                <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />
+            <div className='DP'>
+                <img src={DP} />
+                <p>{user.isSuccess && user.data.data.user.login.toUpperCase()}</p>
             </div>
+            <HiDotsVertical className='menuicon' onClick={() => setmenu(!menu)} />
+
+
+
             {menu &&
-                <div className='menu' ref={addRef}>
-                    <span className='ucon' onClick={() => setadd(!add)}><MdAddCircleOutline />Create Chat</span>
-                    <span className='ucon' onClick={() => setgrpchat(!grpchat)}><MdGroups />Create Group</span>
-                    <span className='ucon' onClick={handlelogout}><MdLogout />LogOut</span>
-                </div>
-            }
+                <ul className='menu' ref={addRef}>
+                    <li onClick={() => setadd(!add)}>New Chat<MdAddCircleOutline /></li>
+                    <li onClick={() => setgrpchat(!grpchat)}>New Group<MdGroups /></li>
+                    <li onClick={handlelogout}>LogOut<MdLogout /></li>
+                </ul>}
+
+
+
             {add &&
                 <div className='add' ref={addRef}>
                     {
@@ -110,6 +117,7 @@ const Navbar = () => {
                     }
                 </div>
             }
+
             {grpchat &&
                 <div className='add' ref={addRef}>
                     <form onSubmit={handlecreategrp}>

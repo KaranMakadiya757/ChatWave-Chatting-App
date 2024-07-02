@@ -1,14 +1,11 @@
 .chats_container {
-    box-sizing: border-box;
-    height: 100vh;
     display: grid;
-    grid-template-rows: 70px 1fr 50px;
+    height: calc(100vh - 60px);
+    grid-template-rows: 50px 1fr 50px;
+    gap: 20px;
 }
 
 .input form {
-    /* height: 50px; */
-    background-color: rgb(40, 40, 40);
-    border-top: 1px solid rgb(80, 80, 80);
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -37,11 +34,7 @@
 }
 
 .msglist {
-    background-color: rgb(70, 70, 70);
     padding: 10px;
-    /* height: calc(100% - 140px); */
-    display: flex;
-    flex-direction: column;
     gap: 20px;
     overflow-y: auto;
 
@@ -132,9 +125,7 @@
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    height: 50px;
-    background-color: rgb(40, 40, 40);
-    border-bottom: 1px solid rgb(80, 80, 80);
+    border: 1px solid rgb(80, 80, 80);
     justify-content: space-between;
 
     .divleft {

@@ -4,26 +4,32 @@
   font-family: 'ExtraLight';
   src: url('./assets/Fonts/NunitoSans-ExtraLight.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Light';
   src: url('./assets/Fonts/NunitoSans-Light.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Regular';
   src: url('./assets/Fonts/NunitoSans-Regular.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'SemiBold';
   src: url('./assets/Fonts/NunitoSans-SemiBold.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Bold';
   src: url('./assets/Fonts/NunitoSans-Bold.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Black';
   src: url('./assets/Fonts/NunitoSans-Black.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'ExtraBold';
   src: url('./assets/Fonts/NunitoSans-ExtraBold.ttf') format('truetype');
@@ -82,20 +88,15 @@
   font-size: 4px;
 }
 
-* {
-  font-family: 'Regular';
-  background-color: var(--soft);
-}
-
-
-
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-size: 4rem;
+  font-family: 'Regular';
+  background-color: var(--soft);
 }
 
 .Toastify__toast {
@@ -106,5 +107,3 @@ body {
   letter-spacing: 1.5px;
   color: var(--gray);
 }
-
-
