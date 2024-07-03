@@ -9,10 +9,12 @@ import { create_chat, create_group_chat, get_user, get_userlist } from '../API/A
 
 // REACT ICONS 
 import { MdLogout, MdGroups, MdAddCircleOutline } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
 import { HiDotsVertical } from "react-icons/hi";
 
 // CSS
 import DP from '../../assets/Photos/a5bc3d87-bd5e-498c-9365-78696a73d802.jpg'
+import nouser from "../../assets/Photos/No User.png"
 import './Sidebar.css'
 
 
@@ -37,7 +39,11 @@ const Navbar = () => {
         onSuccess: (data) => nev(`/home/${data.data._id}`)
     })
     const newgroup = useMutation('create_group_chat', create_group_chat, {
-        onSuccess: (data) => nev(d`/home/${data.data._id}`)
+        onSuccess: (data) => {
+            nev(`/home/${data.data._id}`)
+            setgrpchat(false)
+            setgroupinfo({ type: 2, name: '', occupants_ids: [] })
+        }
     })
 
 
@@ -92,35 +98,57 @@ const Navbar = () => {
                 <img src={DP} />
                 <p>{user.isSuccess && user.data.data.user.login.toUpperCase()}</p>
             </div>
-            <HiDotsVertical className='menuicon' onClick={() => setmenu(!menu)} />
+            <span ref={ref2}>
+                <HiDotsVertical
+                    className='menuicon'
+                    onClick={() => {
+                        (!add && !grpchat) && setmenu(!menu);
+                        add && setadd(false)
+                        grpchat && setgrpchat(false)
+                    }} />
+            </span>
 
 
 
             {menu &&
                 <ul className='menu' ref={addRef}>
-                    <li onClick={() => setadd(!add)}>New Chat<MdAddCircleOutline /></li>
-                    <li onClick={() => setgrpchat(!grpchat)}>New Group<MdGroups /></li>
-                    <li onClick={handlelogout}>LogOut<MdLogout /></li>
+                    <li onClick={() => {
+                        setadd(!add)
+                        setmenu(false)
+                    }}>
+                        New Chat<MdAddCircleOutline />
+                    </li>
+
+                    <li onClick={() => {
+                        setgrpchat(!grpchat)
+                        setmenu(false)
+                    }}>
+                        New Group<MdGroups />
+                    </li>
+
+                    <li onClick={handlelogout}>
+                        LogOut<MdLogout />
+                    </li>
                 </ul>}
 
 
 
             {add &&
-                <div className='add' ref={addRef}>
+                <ul className='add' ref={addRef}>
                     {
                         userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
-                            <div key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
-                                <img src="https://as1.ftcdn.net/v2/jpg/05/90/59/88/1000_F_590598870_TOcGd4cUZzPoEMlxSc7XYwcupHOE0vLM.jpg" alt="" />
+                            <li key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
+                                <img src={nouser}/>
                                 <span>{u.user.login}</span>
-                            </div>
+                            </li>
                         ))
                     }
-                </div>
+                </ul>
             }
 
             {grpchat &&
-                <div className='add' ref={addRef}>
-                    <form onSubmit={handlecreategrp}>
+                <ul className='group' ref={addRef}>
+                    <li>
                         <input
                             type="text"
                             value={groupinfo.name}
@@ -128,23 +156,22 @@ const Navbar = () => {
                             onChange={(e) => setgroupinfo({ ...groupinfo, name: e.target.value })}
                             required
                         />
-                        <input type="submit" value="Create" className='button' />
-                    </form>
-                    <hr style={{ width: '99%' }} />
+                        <IoMdAdd className='button' onClick={handlecreategrp}/>
+                    </li>
                     {
                         userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
-                            <div
+                            <li
                                 key={u.user.id}
                                 className="ucon"
                                 onClick={() => handlegrp(u.user.id)}
-                                style={{ backgroundColor: groupinfo.occupants_ids.includes(u.user.id) ? 'rgb(100,100,100)' : 'rgb(47,47,47)', cursor: 'pointer' }}
+                                style={{ boxShadow: groupinfo.occupants_ids.includes(u.user.id) ? 'var(--shadow-2-inset)' : '', cursor: 'pointer' }}
                             >
-                                <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" alt="" />
+                                <img src={nouser}/>
                                 <span className='uname'>{u.user.login}</span>
-                            </div>
+                            </li>
                         ))
                     }
-                </div>
+                </ul>
             }
         </div>
     )
