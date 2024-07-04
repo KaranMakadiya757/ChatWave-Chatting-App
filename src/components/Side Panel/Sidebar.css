@@ -20,6 +20,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        cursor: pointer;
     }
 
     .DP img {
@@ -32,6 +33,11 @@
         font-size: 4rem;
         letter-spacing: 1px;
         color: var(--dark);
+    }
+
+    .logo {
+        width: 60px;
+        aspect-ratio: 1/1;
     }
 
     .menuicon {
@@ -55,7 +61,7 @@
         display: grid;
         gap: 10px;
         padding: 20px;
-        box-shadow: var(--shadow-2-inset);
+        box-shadow: var(--shadow-2);
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -83,7 +89,7 @@
         gap: 10px;
         padding: 5px 10px;
         cursor: pointer;
-        box-shadow: var(--shadow-2);
+        /* box-shadow: var(--shadow-2); */
 
         &:hover {
             box-shadow: var(--shadow-2-inset);

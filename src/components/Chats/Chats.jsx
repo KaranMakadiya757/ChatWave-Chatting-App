@@ -13,11 +13,13 @@ import { get_dialog } from "../API/APICalls";
 import { useParams } from "react-router-dom";
 
 // CSS 
+import { bouncy } from "ldrs";
 import './Chats.css'
 
 
 const Chats = () => {
     const ref = useRef(null)
+    bouncy.register()
     // GETTING ID FROM URL 
     const params = useParams()
 

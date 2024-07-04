@@ -32,6 +32,7 @@ const Input = ({ id }) => {
 
     return (
         <div className='input'>
+
             <form onSubmit={handlesubmit}>
                 <label htmlFor="file">
                     <ImAttachment className='attach' />
@@ -50,6 +51,7 @@ const Input = ({ id }) => {
                 />
                 <button> <IoSend /> </button>
             </form>
+            
         </div>
     )
 }

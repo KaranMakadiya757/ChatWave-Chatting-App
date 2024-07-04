@@ -14,6 +14,7 @@ import { HiDotsVertical } from "react-icons/hi";
 
 // CSS
 import DP from '../../assets/Photos/a5bc3d87-bd5e-498c-9365-78696a73d802.jpg'
+import logo from '../../assets/Photos/logo2.png'
 import nouser from "../../assets/Photos/No User.png"
 import './Sidebar.css'
 
@@ -94,20 +95,16 @@ const Navbar = () => {
     return (
         <div className='navbar'>
 
-            <div className='DP'>
-                <img src={DP} />
-                <p>{user.isSuccess && user.data.data.user.login.toUpperCase()}</p>
-            </div>
-            <span ref={ref2}>
-                <HiDotsVertical
-                    className='menuicon'
-                    onClick={() => {
-                        (!add && !grpchat) && setmenu(!menu);
-                        add && setadd(false)
-                        grpchat && setgrpchat(false)
-                    }} />
-            </span>
+            <img className='logo' src={logo} />
 
+            <div className='DP' ref={ref2} onClick={() => {
+                (!add && !grpchat) && setmenu(!menu);
+                add && setadd(false)
+                grpchat && setgrpchat(false)
+            }}>
+                <p>{user.isSuccess && user.data.data.user.login.toUpperCase()}</p>
+                <img src={DP} />
+            </div>
 
 
             {menu &&
@@ -138,7 +135,7 @@ const Navbar = () => {
                     {
                         userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
                             <li key={u.user.id} className='ucon' onClick={() => handleadd(u)}>
-                                <img src={nouser}/>
+                                <img src={nouser} />
                                 <span>{u.user.login}</span>
                             </li>
                         ))
@@ -156,7 +153,7 @@ const Navbar = () => {
                             onChange={(e) => setgroupinfo({ ...groupinfo, name: e.target.value })}
                             required
                         />
-                        <IoMdAdd className='button' onClick={handlecreategrp}/>
+                        <IoMdAdd className='button' onClick={handlecreategrp} />
                     </li>
                     {
                         userlist.data.data.items.filter(i => i.user.id != sessionStorage.getItem('userid')).map((u) => (
@@ -166,7 +163,7 @@ const Navbar = () => {
                                 onClick={() => handlegrp(u.user.id)}
                                 style={{ boxShadow: groupinfo.occupants_ids.includes(u.user.id) ? 'var(--shadow-2-inset)' : '', cursor: 'pointer' }}
                             >
-                                <img src={nouser}/>
+                                <img src={nouser} />
                                 <span className='uname'>{u.user.login}</span>
                             </li>
                         ))

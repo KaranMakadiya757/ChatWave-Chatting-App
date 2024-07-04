@@ -12,7 +12,7 @@ const Message = ({ type, id, bottomref }) => {
     const [messages, setmessages] = useState([])
     let lastdate = addDays(new Date(), 1)
 
-    const { data: msg, isSuccess } = useQuery(['get_messagelist', id], get_messagelist,
+    const { data: msg, isSuccess, isLoading } = useQuery(['get_messagelist', id], get_messagelist,
         {
             refetchInterval: 500,
             enabled: !!id,
@@ -36,6 +36,14 @@ const Message = ({ type, id, bottomref }) => {
     useEffect(() => {
         bottomref.current?.scrollIntoView();
     }, [messages]);
+
+    if (isLoading) {
+        return (
+            <div className="loader">
+                <l-bouncy size={30} speed={1} color='#44476A'></l-bouncy>
+            </div>
+        )
+    }
 
     return (
         <div className='msglist'>

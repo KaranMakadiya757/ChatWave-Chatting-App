@@ -76,7 +76,7 @@
   --gray-800: #525480;
 
   /* BIG ELEMENTS SHADOW  */
-  --shadow-1: 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
+  --shadow-1: 4px 4px 8px #b8b9be,-4px -4px 8px #fff;
 
   /* BIG ELEMENTS INSET SHADOW  */
   --shadow-1-inset: inset 6px 6px 12px #b8b9be, inset -6px -6px 12px #fff;
