@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 
 // REACT ICONS 
 import { HiDotsVertical } from "react-icons/hi";
+import { IoCall } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
+import { FaVideo } from "react-icons/fa6";
 
 // REACT-QUERY AND FUNCTION 
 import { useMutation } from 'react-query';
@@ -12,6 +14,7 @@ import { delete_chat } from '../API/APICalls';
 import { useNavigate } from 'react-router-dom';
 
 // CSS 
+import nouser from "../../assets/Photos/No User.png"
 import './Chats.css'
 
 const Topbar = ({ name, id }) => {
@@ -44,19 +47,23 @@ const Topbar = ({ name, id }) => {
     }, [ref, ref2])
 
     return (
-        <div className='topbar_container'>
-            <div className='topbar_chats'>
-                <div className='divleft'>
-                    <img src='https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg' />
-                    <span>{name}</span>
-                </div>
-                <span ref={ref2}><HiDotsVertical className='icon' onClick={() => setmenu(!menu)} /></span>
-                {menu &&
-                    <div className='menu' ref={ref} onClick={() => handleclick(id)}>
-                        <MdDelete style={{ color: 'white' }} />
-                        <span>Delete Chat</span>
-                    </div>}
+        <div className='topbar_chats'>
+
+            <div className='divleft'>
+                <img src={nouser} />
+                <p>{name}</p>
             </div>
+
+            <div className='divright' ref={ref2}>
+                <IoCall className='icon'/>
+                <FaVideo className='icon'/>
+                <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />
+            </div>
+
+            {menu && <div className='menu' ref={ref} onClick={() => handleclick(id)}>
+                <MdDelete className='menuicon'/>
+                <p>Delete Chat</p>
+            </div>}
         </div>
     )
 }

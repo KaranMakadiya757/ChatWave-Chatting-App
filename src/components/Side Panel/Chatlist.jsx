@@ -23,7 +23,6 @@ const Chatlist = () => {
 
   // HANDLING THE CHAT SELECTION FUNCTIONALITY 
   const handleclick = (data) => {
-    console.log(data)
     nev(`/home/${data._id}`)
   }
 
@@ -41,12 +40,12 @@ const Chatlist = () => {
 
           <div className='chatinfo'>
             <h3>{d.name}</h3>
-            <p>{d.last_message}</p>
+            {d.last_message && <p>{d.last_message}</p>}
           </div>
 
           {d.unread_messages_count != 0 &&
             <div className='count'>
-              <p>{d.unread_messages_count}</p>
+              {/* <p>{d.unread_messages_count}</p> */}
             </div>
           }
         </div>

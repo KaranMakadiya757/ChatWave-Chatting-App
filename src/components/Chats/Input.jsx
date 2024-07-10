@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // REACT-ICONS 
 import { IoSend } from "react-icons/io5";
@@ -17,6 +17,11 @@ const Input = ({ id }) => {
 
     // CREATE CHAT FUNCTION 
     const { mutate: newmsg } = useMutation('create_message', create_message)
+
+    const handleFiles = (e) => {
+        console.log(e.target.files)
+        // DEVELOP IN FUTURE
+    } 
 
     // HANDLE MESSAGE SEND 
     const handlesubmit = (e) => {
@@ -41,7 +46,10 @@ const Input = ({ id }) => {
                     type="file"
                     id='file'
                     style={{ display: 'none' }}
+                    onChange={handleFiles}
                 />
+
+
                 <input
                     value={message}
                     type="text"

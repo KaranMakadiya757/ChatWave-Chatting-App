@@ -1,224 +1,231 @@
 .sidebar {
-    display: grid;
-    grid-template-rows: 50px 1fr;
-    width: 100%;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  width: 100%;
 }
-
 
 .navbar {
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 12px;
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: var(--shadow-2-inset);
+
+  .DP {
+    background: transparent;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
-    box-shadow: var(--shadow-2-inset);
+    gap: 10px;
+    cursor: pointer;
+  }
 
-    .DP {
-        background: transparent;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-    }
+  .DP img {
+    width: 30px;
+    border-radius: 50%;
+  }
 
-    .DP img {
-        width: 30px;
-        border-radius: 50%;
-    }
+  .DP p {
+    font-family: "Bold";
+    font-size: 4rem;
+    letter-spacing: 1px;
+    color: var(--dark);
+  }
 
-    .DP p {
-        font-family: "Bold";
-        font-size: 4rem;
-        letter-spacing: 1px;
-        color: var(--dark);
-    }
+  .logo {
+    width: 60px;
+    aspect-ratio: 1/1;
+  }
 
-    .logo {
-        width: 60px;
-        aspect-ratio: 1/1;
-    }
+  .menuicon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 5rem;
+    color: var(--dark);
+    cursor: pointer;
+  }
 
-    .menuicon {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 5rem;
-        color: var(--dark);
-        cursor: pointer;
-    }
-
-    ul {
-        background-color: var(--soft);
-        position: absolute;
-        min-width: 150px;
-        top: 60px;
-        right: 0px;
-        list-style: none;
-        margin: 0;
-        border-radius: 10px;
-        display: grid;
-        gap: 10px;
-        padding: 20px;
-        box-shadow: var(--shadow-2);
-
-        &::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 6px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    }
-
-    ul>li {
-        font-family: "Bold";
-        font-size: 4rem;
-        letter-spacing: 1px;
-        color: var(--dark);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        gap: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
-        /* box-shadow: var(--shadow-2); */
-
-        &:hover {
-            box-shadow: var(--shadow-2-inset);
-        }
-
-    }
-
-    ul>li>img {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-    }
-
-    ul.add>li {
-        justify-content: start;
-        width: 90%;
-    }
-
-    ul.group>li {
-        justify-content: start;
-        width: 90%;
-    }
-
-    ul.group>li:nth-child(1) {
-        width: 90%;
-        box-shadow: none;
-        padding-left: 0;
-
-        input {
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 10px 0 10px 10px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-2);
-            width: 100%;
-            font-family: "SemiBold";
-            font-style: 3rem;
-            letter-spacing: 1px;
-            color: var(--default);
-        }
-
-        .button {
-            background: transparent;
-            cursor: pointer;
-            font-size: 5rem;
-            padding: 5px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-2);
-
-            &:hover {
-                box-shadow: var(--shadow-2-inset);
-            }
-        }
-    }
-}
-
-.chatlist {
-    height: auto;
-    max-height: 600px;
-    overflow: auto;
-    padding: 20px 0;
+  ul {
+    background-color: var(--soft);
+    position: absolute;
+    min-width: 150px;
+    top: 60px;
+    right: 0px;
+    list-style: none;
+    margin: 0;
+    border-radius: 10px;
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow-2);
 
     &::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-    }
-
-    &::-webkit-scrollbar-track {
-        border-radius: 10px;
+      width: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #c5c5c5;
-        border-radius: 10px;
+      background: #888;
+      border-radius: 6px;
     }
 
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
 
-    .chat {
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        margin: 10px;
-        gap: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-        box-shadow: var(--shadow-2);
+  ul > li {
+    font-family: "Bold";
+    font-size: 4rem;
+    letter-spacing: 1px;
+    color: var(--dark);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    /* box-shadow: var(--shadow-2); */
 
-        &:hover {
-            box-shadow: var(--shadow-2-inset);
-        }
+    &:hover {
+      box-shadow: var(--shadow-2-inset);
+    }
+  }
+
+  ul > li > img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+
+  ul.add > li {
+    justify-content: start;
+    width: 90%;
+  }
+
+  ul.group > li {
+    justify-content: start;
+    width: 90%;
+  }
+
+  ul.group > li:nth-child(1) {
+    width: 90%;
+    box-shadow: none;
+    padding-left: 0;
+
+    input {
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 10px 0 10px 10px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-2);
+      width: 100%;
+      font-family: "SemiBold";
+      font-style: 3rem;
+      letter-spacing: 1px;
+      color: var(--default);
     }
 
-    .chat.selected {
+    .button {
+      background: transparent;
+      cursor: pointer;
+      font-size: 5rem;
+      padding: 5px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-2);
+
+      &:hover {
         box-shadow: var(--shadow-2-inset);
+      }
     }
+  }
+}
 
-    img {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
+.chatlist {
+  height: auto;
+  max-height: 600px;
+  overflow: auto;
+  padding: 20px 0;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c5c5c5;
+    border-radius: 10px;
+  }
+
+  .chat {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    column-gap: 10px;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: var(--shadow-2);
+
+    &:hover {
+      box-shadow: var(--shadow-2-inset);
     }
+  }
 
-    .chatinfo {
-        width: 80%;
-    }
+  .chat.selected {
+    box-shadow: var(--shadow-2-inset);
+  }
 
-    .chatinfo h3 {
-        font-weight: bold;
-        font-size: 18px;
-        margin: 0;
-    }
+  img {
+    width: 45px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
 
-    .chatinfo p {
-        margin: 2px;
-        font-size: 15px;
-        font-weight: light;
-        height: 20px;
-        overflow: hidden;
-    }
+  .chatinfo h3 {
+    margin: 0;
+    padding: 0;
+    font-family: "Bold";
+    font-size: 5rem;
+    letter-spacing: 1px;
+    color: var(--dark);
+  }
 
-    .chatinfo .count {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 20px;
-        width: 20px;
-        background-color: #5b5b5b;
-        border-radius: 50%;
-    }
+  .chatinfo p {
+    margin: 0;
+    padding: 0;
+    font-family: "Regular";
+    font-size: 3rem;
+    letter-spacing: 0.5px;
+    color: var(--dark);
+    max-height: 20px;
+    overflow: hidden;
+  }
 
+  .count {
+    display: grid;
+    place-items: center;
+    height: 10px;
+    width: 10px;
+    background-color: var(--dark);
+    border-radius: 50%;
+  }
+
+  .count p {
+    font-family: "Regular";
+    font-size: 3rem;
+    letter-spacing: 1px;
+    color: var(--soft);
+    padding: 0;
+    margin: 0;
+  }
 }

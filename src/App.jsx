@@ -1,23 +1,36 @@
-import './App.css'
+// REACT-ROUTER-DOM
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import 'react-toastify/dist/ReactToastify.css';
+
+// COMPONENTS IMPORT
 import Welcome from './components/Welcome/Welcome'
 import Login from './components/Login and Register/Login'
 import Register from './components/Login and Register/Register'
-import { ToastContainer } from 'react-toastify';
-import Home from './components/Home/Home';
-import { AuthGuard, LoginAuth } from './components/Authguard/AuthGuard';
+import Home from './components/Home/Home'
+import { AuthGuard, LoginAuth } from './components/Authguard/AuthGuard'
+
+// REACT-TOASIFY
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+// REACT REDUX
+import { useSelector } from 'react-redux'
+
+// CSS
+import './App.css'
+import { useEffect } from 'react'
+
 
 function App() {
-  const Client = new QueryClient()
+  const theme = useSelector(state => state.Theme.theme)
+
+  useEffect(() => {
+    document.body.classList.add(theme)
+  }, [theme])
 
   return (
     <>
-      <QueryClientProvider client={Client}>
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </QueryClientProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   )
 }
@@ -25,7 +38,7 @@ function App() {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LoginAuth><Welcome /></LoginAuth> 
+    element: <LoginAuth><Welcome /></LoginAuth>
   },
   {
     path: '/login',
