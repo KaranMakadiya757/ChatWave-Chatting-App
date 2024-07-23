@@ -49,7 +49,7 @@ const Register = () => {
 
     const register = useMutation('Create_User', Create_User,
         {
-            onSuccess: nev('/login'),
+            onSuccess: () => nev('/login'),
             onError: (error) => {
                 console.log(error)
                 toast.error(`Oops! 😐 ${error.response.data.errors.login.map(i => i)}`, {
@@ -98,7 +98,7 @@ const Register = () => {
                             }
                         </div>
 
-                        <button className='button' disabled={register.isLoading}>{register.isLoading ?<l-bouncy size={30} speed={1} color='#44476A'></l-bouncy> : 'SIGNUP'}</button>
+                        <button className='button' disabled={register.isLoading}>{register.isLoading ?<l-bouncy size={30} speed={1} color='var(--gray)'></l-bouncy> : 'SIGNUP'}</button>
 
                     </form>
                     <span className='msg'>Created one? Now go and <NavLink className='link' to='/login'>Login</NavLink></span>

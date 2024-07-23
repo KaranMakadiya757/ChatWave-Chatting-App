@@ -13,6 +13,8 @@ import { delete_chat } from '../API/APICalls';
 // REACT-ROUTER-DOM 
 import { useNavigate } from 'react-router-dom';
 
+import ToggleButton from "../../common/ToggleButton.jsx"
+
 // CSS 
 import nouser from "../../assets/Photos/No User.png"
 import './Chats.css'
@@ -55,15 +57,21 @@ const Topbar = ({ name, id }) => {
             </div>
 
             <div className='divright' ref={ref2}>
-                <IoCall className='icon'/>
-                <FaVideo className='icon'/>
+                <IoCall className='icon' />
+                <FaVideo className='icon' />
                 <HiDotsVertical className='icon' onClick={() => setmenu(!menu)} />
             </div>
 
-            {menu && <div className='menu' ref={ref} onClick={() => handleclick(id)}>
-                <MdDelete className='menuicon'/>
-                <p>Delete Chat</p>
-            </div>}
+            {menu && <ul className='menu' ref={ref}>
+                <li onClick={() => handleclick(id)}>
+                    <MdDelete className='menuicon' />
+                    <p>Delete Chat</p>
+                </li>
+                <li>
+                    <ToggleButton />
+                    <p>Dark Mode</p>
+                </li>
+            </ul>}
         </div>
     )
 }

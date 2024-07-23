@@ -25,6 +25,9 @@ function App() {
 
   useEffect(() => {
     document.body.classList.add(theme)
+    return () => {
+      document.body.classList.remove(theme)
+    };
   }, [theme])
 
   return (

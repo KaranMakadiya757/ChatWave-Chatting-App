@@ -6,9 +6,11 @@ import { get_messagelist, get_userlist } from '../API/APICalls';
 
 // CSS 
 import './Chats.css'
+import nouser from "../../assets/Photos/No User.png"
 import { addDays, format } from 'date-fns';
 
 const Message = ({ type, id, bottomref }) => {
+    const [time, settime] = useState("false")
     const [messages, setmessages] = useState([])
     let lastdate = addDays(new Date(), 1)
 
@@ -34,35 +36,54 @@ const Message = ({ type, id, bottomref }) => {
     }
 
     useEffect(() => {
+        console.log(messages)
+    }, [messages])
+
+
+    useEffect(() => {
         bottomref.current?.scrollIntoView();
     }, [messages]);
+
+
 
     if (isLoading) {
         return (
             <div className="loader">
-                <l-bouncy size={30} speed={1} color='#44476A'></l-bouncy>
+                <l-bouncy size={30} speed={1} color='var(--gray)'></l-bouncy>
             </div>
         )
     }
 
     return (
         <div className='msglist'>
-            {isSuccess && msg.data.items.map((d, index) => (
-                <div key={index}>
-                    <div className='date'>{displayDateIfNeeded(d.created_at)}</div>
-                    <div className={d.sender_id === sessionStorage.getItem('userid') ? 'msg2' : 'msg'} >
-                        {type !== 3 &&
-                            <img src="https://cdn1.vectorstock.com/i/1000x1000/20/65/man-avatar-profile-vector-21372065.jpg" />}
-                        <div className='msgbox'>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                {format(d.created_at, "HH:mm")}
-                                {type !== 3 && userlist.data.items.filter(i => i.user.id === d.sender_id)[0].user.login}
+
+            <ul>
+                {isSuccess && msg.data.items.map(d => (
+                    <React.Fragment key={d._id}>
+                        <li className='date'>{displayDateIfNeeded(d.created_at)}</li>
+
+                        <li className={d.sender_id == sessionStorage.getItem('userid') ? 'msg' : 'msg2'} >
+
+                            {type !== 3 && <img src={nouser} />}
+
+
+                            <div className='info'
+                                onMouseEnter={() => settime(d._id)}
+                                onMouseLeave={() => settime("")}
+                            >
+
+                                {d.sender_id != sessionStorage.getItem('userid') && <h4>{type !== 3 && userlist.data.items.filter(i => i.user.id === d.sender_id)[0].user.login}</h4>}
+                                <p className="message">{d.message}</p>
+                                {time === d._id && <p className="time">{format(d.created_at, "HH:mm")}</p>}
+
                             </div>
-                            <p>{d.message}</p>
-                        </div>
-                    </div>
-                </div>
-            ))}
+
+                        </li>
+                    </React.Fragment>
+                ))}
+
+            </ul>
+
             <span ref={bottomref} />
         </div>
     );

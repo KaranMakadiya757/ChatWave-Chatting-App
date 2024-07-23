@@ -102,7 +102,7 @@ const Login = () => {
 
                         </div>
 
-                        <button className='button' disabled={login.isLoading}>{login.isLoading ? <l-bouncy size={30} speed={1} color='#44476A'></l-bouncy> : 'LOGIN'}</button>
+                        <button className='button' disabled={login.isLoading}>{login.isLoading ? <l-bouncy size={30} speed={1} color='var(--gray)'></l-bouncy> : 'LOGIN'}</button>
                     </form>
                     <div className='msg'>Don't Have a Account? No worries <NavLink className='link' to='/register'>SignUp</NavLink></div>
                 </div>
