@@ -103,7 +103,7 @@ const Navbar = () => {
                 grpchat && setgrpchat(false)
             }}>
                 <p>{user.isSuccess && user.data.data.user.login.toUpperCase()}</p>
-                <img src={DP} />
+                <img src={nouser} />
             </div>
 
 
