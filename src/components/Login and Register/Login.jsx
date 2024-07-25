@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import { Login_User } from "../API/APICalls";
 
 // REACT ICON, TOASTIFY NOTIFICATION AND LOADER 
-import { FaUser, FaLock, FaUnlock } from "react-icons/fa6";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { bouncy } from "ldrs";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ const Login = () => {
     const nev = useNavigate();
     bouncy.register()
 
-    /* --------------------------- HNADLING THE LOGIN SUBMIT BUTTON --------------------------- */ 
+    /* --------------------------- HNADLING THE LOGIN SUBMIT BUTTON --------------------------- */
 
     const handlesubmit = (e) => {
         e.preventDefault();
@@ -94,10 +94,12 @@ const Login = () => {
                                 placeholder="password"
                                 onChange={(e) => setdata({ ...data, [e.target.name]: e.target.value })}
                             />
+                            <FaLock className={`icon ${error.password && 'iconerr'}`} />
+
                             {showpass ?
-                                <FaUnlock className={`icon ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
+                                <FaEye className={`pass ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
                                 :
-                                <FaLock className={`icon ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
+                                <FaEyeSlash className={`pass ${error.password && 'iconerr'}`} onClick={() => setshowpass(!showpass)} />
                             }
 
                         </div>

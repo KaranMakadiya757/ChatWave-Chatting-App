@@ -129,10 +129,12 @@ export const get_messagelist = ({ queryKey }) => {
 /* -------------------------------- DELETE CHAT DIALOG -------------------------------- */
 
 export const delete_chat = (id) => {
-    return axios.delete(`https://api.quickblox.com/chat/Dialog/${id}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `ApiKey ${import.meta.env.VITE_API_KEY}`
-        }
-    })
+    if (id !== import.meta.env.VITE_PUBLICCHAT_ID) {
+        return axios.delete(`https://api.quickblox.com/chat/Dialog/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `ApiKey ${import.meta.env.VITE_API_KEY}`
+            }
+        })
+    }
 };

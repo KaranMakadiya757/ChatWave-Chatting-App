@@ -90,6 +90,20 @@
         color: var(--danger);
     }
 
+    .right .pass {
+        position: absolute;
+        top: 45%;
+        right: 15px;
+        transform: translateY(-50%);
+        font-size: 4rem;
+        color: var(--gray);
+        cursor: pointer;
+    }
+
+    .right .pass.iconerr {
+        color: var(--danger);
+    }
+
     .right .button {
         background: transparent;
         padding: 10px;
