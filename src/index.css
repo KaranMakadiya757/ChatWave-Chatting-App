@@ -87,7 +87,7 @@ body.dark {
 
 .Toastify__toast {
   background: transparent;
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  box-shadow: var(--shadow-2);
   font-family: 'Bold';
   font-size: 3rem;
   letter-spacing: 1.5px;
