@@ -18,7 +18,7 @@ const ToggleButton = () => {
             type="checkbox"
             className="theme-checkbox"
             checked={mode === 'dark'}
-            onChange={() => dispatch(toggleTheme())}
+            onChange={() => {dispatch(toggleTheme())}}
         />
     )
 }
